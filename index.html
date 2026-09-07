@@ -52,6 +52,7 @@
             position: relative;
 
             width: 100vw;
+
             height: 100vh;
             height: 100svh;
 
@@ -245,7 +246,13 @@
 
             justify-content: center;
 
-            width: 270px;
+            /*
+             * Increased from 270px to 330px
+             * so the Save the Date text
+             * stays on one line.
+             */
+
+            width: 330px;
 
             padding: 13px 22px;
 
@@ -266,6 +273,13 @@
             text-transform: uppercase;
 
             text-align: center;
+
+            /*
+             * Prevents the button text
+             * from wrapping onto two lines.
+             */
+
+            white-space: nowrap;
 
             border:
                 1px solid
@@ -337,7 +351,6 @@
             transform:
                 translateY(-2px);
         }
-
 
 
         .button:hover::after {
@@ -554,9 +567,7 @@
 
                 opacity: 1;
             }
-
         }
-
 
 
         @keyframes contentFadeIn {
@@ -582,7 +593,6 @@
                         -50%
                     );
             }
-
         }
 
 
@@ -601,7 +611,6 @@
             }
 
 
-
             .overlay {
 
                 background:
@@ -614,14 +623,12 @@
             }
 
 
-
             .content {
 
                 top: 47%;
 
                 width: 92%;
             }
-
 
 
             .names {
@@ -641,7 +648,6 @@
             }
 
 
-
             .date {
 
                 font-size: 0.9rem;
@@ -652,26 +658,32 @@
             }
 
 
-
             .buttons {
 
                 gap: 12px;
             }
 
 
-
             .button {
+
+                /*
+                 * Keeps the button responsive
+                 * on smaller phones while
+                 * preventing text wrapping.
+                 */
 
                 width:
                     min(
-                        300px,
-                        85vw
+                        330px,
+                        90vw
                     );
 
                 padding:
                     13px 18px;
 
                 font-size: 0.78rem;
+
+                white-space: nowrap;
             }
 
 
@@ -686,14 +698,12 @@
             }
 
 
-
             .video-container {
 
                 width: 94vw;
 
                 aspect-ratio: 16 / 9;
             }
-
 
 
             .close-video {
@@ -729,14 +739,12 @@
             }
 
 
-
             .names {
 
                 font-size: 3rem;
 
                 margin-bottom: 12px;
             }
-
 
 
             .date {
@@ -903,6 +911,7 @@
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen
             >
+
             </iframe>
 
 
@@ -975,12 +984,14 @@
             "click",
             function(event) {
 
+
                 /*
                  * Prevent the button from
                  * jumping to the top of the page.
                  */
 
                 event.preventDefault();
+
 
 
                 /*
@@ -995,6 +1006,7 @@
                 backgroundVideo.pause();
 
 
+
                 /*
                  * =================================
                  * LOAD VIMEO VIDEO
@@ -1003,6 +1015,7 @@
 
                 vimeoPlayer.src =
                     vimeoURL;
+
 
 
                 /*
