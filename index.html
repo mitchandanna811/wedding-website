@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Anna and Mitch</title>
 
-    <!-- Adobe Fonts -->
+
+    <!-- =========================================
+         ADOBE FONTS
+    ========================================== -->
+
     <link rel="stylesheet" href="https://use.typekit.net/anp5gec.css">
+
 
     <style>
 
         /* =========================================
            BASIC PAGE SETUP
-        ========================================= */
+        ========================================== */
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
 
         html,
         body {
@@ -29,16 +36,19 @@
             overflow: hidden;
         }
 
+
         body {
             background: #000;
         }
 
 
+
         /* =========================================
            HERO
-        ========================================= */
+        ========================================== */
 
         .hero {
+
             position: relative;
 
             width: 100vw;
@@ -51,11 +61,13 @@
         }
 
 
+
         /* =========================================
            BACKGROUND VIDEO
-        ========================================= */
+        ========================================== */
 
         .hero-video {
+
             position: absolute;
 
             inset: 0;
@@ -64,6 +76,7 @@
             height: 100%;
 
             object-fit: cover;
+
             object-position: center center;
 
             opacity: 0;
@@ -72,11 +85,13 @@
         }
 
 
+
         /* =========================================
            CINEMATIC DARKENING
-        ========================================= */
+        ========================================== */
 
         .overlay {
+
             position: absolute;
 
             inset: 0;
@@ -95,11 +110,13 @@
         }
 
 
+
         /* =========================================
            MAIN CONTENT
-        ========================================= */
+        ========================================== */
 
         .content {
+
             position: absolute;
 
             z-index: 2;
@@ -116,7 +133,9 @@
             color: white;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
             opacity: 0;
@@ -126,26 +145,34 @@
         }
 
 
+
         /* =========================================
            NAMES
-        ========================================= */
+        ========================================== */
 
         .names {
+
             font-family: "aunt-mildred-mvb", sans-serif;
 
             font-weight: 400;
+
             font-style: normal;
 
-            font-size: clamp(3.5rem, 6vw, 6.5rem);
+            font-size:
+                clamp(
+                    3.5rem,
+                    6vw,
+                    6.5rem
+                );
 
             line-height: 1;
 
             letter-spacing: 0.01em;
 
             /*
-             * Softer, more diffused shadow.
-             * Less opacity + more blur.
+             * Soft, diffused shadow.
              */
+
             text-shadow:
                 0 2px 16px rgba(0, 0, 0, 0.22);
 
@@ -153,17 +180,25 @@
         }
 
 
+
         /* =========================================
            DATE
-        ========================================= */
+        ========================================== */
 
         .date {
+
             font-family: "legitima", serif;
 
             font-weight: 500;
+
             font-style: normal;
 
-            font-size: clamp(1rem, 1.35vw, 1.35rem);
+            font-size:
+                clamp(
+                    1rem,
+                    1.35vw,
+                    1.35rem
+                );
 
             letter-spacing: 0.18em;
 
@@ -174,16 +209,19 @@
         }
 
 
+
         /* =========================================
            BUTTONS
-        ========================================= */
+        ========================================== */
 
         .buttons {
+
             display: flex;
 
             flex-direction: column;
 
             justify-content: center;
+
             align-items: center;
 
             gap: 13px;
@@ -192,12 +230,19 @@
         }
 
 
+
+        /* =========================================
+           INDIVIDUAL BUTTON
+        ========================================== */
+
         .button {
+
             position: relative;
 
             display: inline-flex;
 
             align-items: center;
+
             justify-content: center;
 
             width: 270px;
@@ -211,6 +256,7 @@
             font-family: "legitima", serif;
 
             font-weight: 500;
+
             font-style: normal;
 
             font-size: 0.82rem;
@@ -221,16 +267,21 @@
 
             text-align: center;
 
-            border: 1px solid rgba(255, 255, 255, 0.65);
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.65);
 
-            background: rgba(0, 0, 0, 0.08);
+            background:
+                rgba(0, 0, 0, 0.08);
 
             backdrop-filter: blur(2px);
+
             -webkit-backdrop-filter: blur(2px);
 
             /*
-             * Very subtle text separation.
+             * Soft text separation.
              */
+
             text-shadow:
                 0 2px 10px rgba(0, 0, 0, 0.20);
 
@@ -241,48 +292,67 @@
         }
 
 
-        /* Animated underline */
+
+        /* =========================================
+           BUTTON UNDERLINE
+        ========================================== */
 
         .button::after {
+
             content: "";
 
             position: absolute;
 
             left: 50%;
+
             bottom: -1px;
 
             width: 0;
+
             height: 1px;
 
             background: white;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
 
-            transition: width 0.4s ease;
+            transition:
+                width 0.4s ease;
         }
 
 
-        /* Hover */
+
+        /* =========================================
+           BUTTON HOVER
+        ========================================== */
 
         .button:hover {
-            background: rgba(255, 255, 255, 0.13);
 
-            border-color: rgba(255, 255, 255, 0.95);
+            background:
+                rgba(255, 255, 255, 0.13);
 
-            transform: translateY(-2px);
+            border-color:
+                rgba(255, 255, 255, 0.95);
+
+            transform:
+                translateY(-2px);
         }
+
 
 
         .button:hover::after {
+
             width: 70%;
         }
 
 
+
         /* =========================================
-           VIMEO CINEMATIC MODAL
-        ========================================= */
+           VIDEO MODAL
+        ========================================== */
 
         .video-modal {
+
             position: fixed;
 
             inset: 0;
@@ -292,11 +362,20 @@
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
             padding: 40px;
 
-            background: rgba(0, 0, 0, 0.92);
+            /*
+             * Dark cinematic overlay.
+             *
+             * The background video underneath
+             * will also be paused when this opens.
+             */
+
+            background:
+                rgba(0, 0, 0, 0.92);
 
             opacity: 0;
 
@@ -310,7 +389,13 @@
         }
 
 
+
+        /* =========================================
+           ACTIVE VIDEO MODAL
+        ========================================== */
+
         .video-modal.active {
+
             opacity: 1;
 
             visibility: visible;
@@ -319,77 +404,96 @@
         }
 
 
-        /* Vimeo video container */
+
+        /* =========================================
+           VIMEO VIDEO CONTAINER
+        ========================================== */
 
         .video-container {
+
             position: relative;
 
-            width: min(1200px, 90vw);
+            width:
+                min(
+                    1200px,
+                    90vw
+                );
 
             aspect-ratio: 16 / 9;
 
             background: #000;
 
             box-shadow:
-                0 20px 80px rgba(0, 0, 0, 0.55);
+                0 20px 80px
+                rgba(0, 0, 0, 0.55);
 
-            transform: scale(0.96);
+            transform:
+                scale(0.96);
 
             transition:
                 transform 0.6s ease;
         }
 
 
-        .video-modal.active .video-container {
-            transform: scale(1);
-        }
 
-
-        /* Vimeo iframe */
+        /* =========================================
+           VIMEO IFRAME
+        ========================================== */
 
         .video-container iframe {
+
             position: absolute;
 
             inset: 0;
 
             width: 100%;
+
             height: 100%;
 
             border: 0;
         }
 
 
+
         /* =========================================
            CLOSE BUTTON
-        ========================================= */
+        ========================================== */
 
         .close-video {
+
             position: fixed;
 
             top: 28px;
+
             right: 32px;
 
             z-index: 11;
 
             width: 42px;
+
             height: 42px;
 
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
-            border: 1px solid rgba(255, 255, 255, 0.55);
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.55);
 
             border-radius: 50%;
 
-            background: rgba(0, 0, 0, 0.15);
+            background:
+                rgba(0, 0, 0, 0.15);
 
             color: white;
 
             font-family: Arial, sans-serif;
 
             font-size: 25px;
+
             font-weight: 200;
 
             line-height: 1;
@@ -403,63 +507,103 @@
         }
 
 
+
+        /* =========================================
+           CLOSE BUTTON HOVER
+        ========================================== */
+
         .close-video:hover {
-            background: rgba(255, 255, 255, 0.15);
 
-            border-color: rgba(255, 255, 255, 0.9);
+            background:
+                rgba(255, 255, 255, 0.15);
 
-            transform: rotate(90deg);
+            border-color:
+                rgba(255, 255, 255, 0.9);
+
+            transform:
+                rotate(90deg);
         }
 
 
+
         /* =========================================
-           ANIMATIONS
-        ========================================= */
+           VIDEO OPEN ANIMATION
+        ========================================== */
+
+        .video-modal.active
+        .video-container {
+
+            transform:
+                scale(1);
+        }
+
+
+
+        /* =========================================
+           PAGE ANIMATIONS
+        ========================================== */
 
         @keyframes videoFadeIn {
 
             from {
+
                 opacity: 0;
             }
 
             to {
+
                 opacity: 1;
             }
 
         }
+
 
 
         @keyframes contentFadeIn {
 
             from {
+
                 opacity: 0;
 
                 transform:
-                    translate(-50%, calc(-50% + 15px));
+                    translate(
+                        -50%,
+                        calc(-50% + 15px)
+                    );
             }
 
             to {
+
                 opacity: 1;
 
                 transform:
-                    translate(-50%, -50%);
+                    translate(
+                        -50%,
+                        -50%
+                    );
             }
 
         }
 
 
+
         /* =========================================
            MOBILE
-        ========================================= */
+        ========================================== */
 
         @media (max-width: 700px) {
 
+
             .hero-video {
-                object-position: 50% center;
+
+                object-position:
+                    50% center;
             }
 
 
+
             .overlay {
+
                 background:
                     linear-gradient(
                         to bottom,
@@ -470,24 +614,36 @@
             }
 
 
+
             .content {
+
                 top: 47%;
 
                 width: 92%;
             }
 
 
+
             .names {
-                font-size: clamp(3.1rem, 13vw, 4.5rem);
+
+                font-size:
+                    clamp(
+                        3.1rem,
+                        13vw,
+                        4.5rem
+                    );
 
                 margin-bottom: 16px;
 
                 text-shadow:
-                    0 2px 14px rgba(0, 0, 0, 0.22);
+                    0 2px 14px
+                    rgba(0, 0, 0, 0.22);
             }
 
 
+
             .date {
+
                 font-size: 0.9rem;
 
                 letter-spacing: 0.14em;
@@ -496,39 +652,58 @@
             }
 
 
+
             .buttons {
+
                 gap: 12px;
             }
 
 
-            .button {
-                width: min(300px, 85vw);
 
-                padding: 13px 18px;
+            .button {
+
+                width:
+                    min(
+                        300px,
+                        85vw
+                    );
+
+                padding:
+                    13px 18px;
 
                 font-size: 0.78rem;
             }
 
 
-            /* Mobile Vimeo modal */
+
+            /* -------------------------------------
+               MOBILE VIDEO MODAL
+            ------------------------------------- */
 
             .video-modal {
+
                 padding: 20px;
             }
 
 
+
             .video-container {
+
                 width: 94vw;
 
                 aspect-ratio: 16 / 9;
             }
 
 
+
             .close-video {
+
                 top: 18px;
+
                 right: 18px;
 
                 width: 38px;
+
                 height: 38px;
 
                 font-size: 22px;
@@ -537,32 +712,44 @@
         }
 
 
+
         /* =========================================
            SMALL / SHORT PHONES
-        ========================================= */
+        ========================================== */
 
-        @media (max-height: 700px) and (max-width: 700px) {
+        @media
+        (max-height: 700px)
+        and
+        (max-width: 700px) {
+
 
             .content {
+
                 top: 46%;
             }
 
 
+
             .names {
+
                 font-size: 3rem;
 
                 margin-bottom: 12px;
             }
 
 
+
             .date {
+
                 margin-bottom: 24px;
             }
 
         }
 
     </style>
+
 </head>
+
 
 
 <body>
@@ -570,11 +757,14 @@
 
     <!-- =========================================
          HERO PAGE
-    ========================================= -->
+    ========================================== -->
 
     <main class="hero">
 
-        <!-- Background Video -->
+
+        <!-- =====================================
+             BACKGROUND HERO VIDEO
+        ====================================== -->
 
         <video
             class="hero-video"
@@ -593,41 +783,64 @@
         </video>
 
 
-        <!-- Cinematic Darkening -->
+
+        <!-- =====================================
+             HERO DARKENING
+        ====================================== -->
 
         <div class="overlay"></div>
 
 
-        <!-- Wedding Information -->
+
+        <!-- =====================================
+             WEDDING INFORMATION
+        ====================================== -->
 
         <section class="content">
 
+
+            <!-- NAMES -->
+
             <h1 class="names">
+
                 Anna and Mitch
+
             </h1>
 
 
+
+            <!-- DATE -->
+
             <div class="date">
+
                 September 26, 2027
+
             </div>
 
 
-            <!-- Buttons -->
+
+            <!-- =================================
+                 BUTTONS
+            ================================== -->
 
             <div class="buttons">
 
-                <!-- Save the Date -->
+
+                <!-- SAVE THE DATE -->
 
                 <a
                     href="#"
                     class="button"
                     id="watch-video"
                 >
+
                     Watch Our Save the Date Video
+
                 </a>
 
 
-                <!-- Zola -->
+
+                <!-- ZOLA WEBSITE -->
 
                 <a
                     href="https://www.zola.com/wedding/annaandmitch926"
@@ -635,8 +848,11 @@
                     target="_blank"
                     rel="noopener noreferrer"
                 >
+
                     Enter Website
+
                 </a>
+
 
             </div>
 
@@ -647,8 +863,8 @@
 
 
     <!-- =========================================
-         VIMEO VIDEO MODAL
-    ========================================= -->
+         CINEMATIC VIMEO VIDEO MODAL
+    ========================================== -->
 
     <div
         class="video-modal"
@@ -656,20 +872,29 @@
         aria-hidden="true"
     >
 
-        <!-- Close Button -->
+
+        <!-- =====================================
+             CLOSE BUTTON
+        ====================================== -->
 
         <button
             class="close-video"
             id="close-video"
             aria-label="Close video"
         >
+
             ×
+
         </button>
 
 
-        <!-- Video -->
+
+        <!-- =====================================
+             VIDEO CONTAINER
+        ====================================== -->
 
         <div class="video-container">
+
 
             <iframe
                 id="vimeo-player"
@@ -677,7 +902,9 @@
                 title="Anna and Mitch Save the Date"
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen
-            ></iframe>
+            >
+            </iframe>
+
 
         </div>
 
@@ -687,76 +914,175 @@
 
     <!-- =========================================
          JAVASCRIPT
-    ========================================= -->
+    ========================================== -->
 
     <script>
 
+
+        /* =========================================
+           GET PAGE ELEMENTS
+        ========================================== */
+
         const watchVideo =
-            document.getElementById("watch-video");
+            document.getElementById(
+                "watch-video"
+            );
+
 
         const videoModal =
-            document.getElementById("video-modal");
+            document.getElementById(
+                "video-modal"
+            );
+
 
         const closeVideo =
-            document.getElementById("close-video");
+            document.getElementById(
+                "close-video"
+            );
+
 
         const vimeoPlayer =
-            document.getElementById("vimeo-player");
+            document.getElementById(
+                "vimeo-player"
+            );
 
 
         /*
-         * Your Vimeo video.
-         *
-         * The "h" value is the private Vimeo
-         * video hash from your Vimeo URL.
+         * This is your background hero video.
          */
+
+        const backgroundVideo =
+            document.querySelector(
+                ".hero-video"
+            );
+
+
+
+        /* =========================================
+           VIMEO VIDEO URL
+        ========================================== */
 
         const vimeoURL =
             "https://player.vimeo.com/video/1224715561?h=3b9908be69&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
 
 
-        /* -----------------------------------------
-           OPEN VIDEO
-        ----------------------------------------- */
 
-        watchVideo.addEventListener("click", function(event) {
+        /* =========================================
+           OPEN VIMEO VIDEO
+        ========================================== */
 
-            event.preventDefault();
+        watchVideo.addEventListener(
+            "click",
+            function(event) {
 
-            vimeoPlayer.src = vimeoURL;
+                /*
+                 * Prevent the button from
+                 * jumping to the top of the page.
+                 */
 
-            videoModal.classList.add("active");
-
-            videoModal.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-        });
+                event.preventDefault();
 
 
-        /* -----------------------------------------
-           CLOSE VIDEO
-        ----------------------------------------- */
+                /*
+                 * =================================
+                 * PAUSE BACKGROUND VIDEO
+                 * =================================
+                 *
+                 * The video stays on the exact
+                 * frame where it was paused.
+                 */
+
+                backgroundVideo.pause();
+
+
+                /*
+                 * =================================
+                 * LOAD VIMEO VIDEO
+                 * =================================
+                 */
+
+                vimeoPlayer.src =
+                    vimeoURL;
+
+
+                /*
+                 * =================================
+                 * SHOW VIDEO MODAL
+                 * =================================
+                 */
+
+                videoModal.classList.add(
+                    "active"
+                );
+
+
+                videoModal.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+            }
+        );
+
+
+
+        /* =========================================
+           CLOSE VIMEO VIDEO
+        ========================================== */
 
         function closeVideoModal() {
 
-            videoModal.classList.remove("active");
+
+            /*
+             * =================================
+             * HIDE VIDEO MODAL
+             * =================================
+             */
+
+            videoModal.classList.remove(
+                "active"
+            );
+
 
             videoModal.setAttribute(
                 "aria-hidden",
                 "true"
             );
 
+
+
             /*
-             * Removing the Vimeo URL stops the video
-             * when the visitor closes the window.
+             * =================================
+             * STOP VIMEO VIDEO
+             * =================================
+             *
+             * Removing the source completely
+             * stops the video.
              */
 
             vimeoPlayer.src = "";
 
+
+
+            /*
+             * =================================
+             * RESUME BACKGROUND VIDEO
+             * =================================
+             *
+             * Because we never changed
+             * currentTime, the background video
+             * resumes exactly where it stopped.
+             */
+
+            backgroundVideo.play();
+
         }
 
+
+
+        /* =========================================
+           CLOSE BUTTON
+        ========================================== */
 
         closeVideo.addEventListener(
             "click",
@@ -764,35 +1090,25 @@
         );
 
 
-        /* -----------------------------------------
-           CLICK OUTSIDE VIDEO TO CLOSE
-        ----------------------------------------- */
+
+        /* =========================================
+           CLICK OUTSIDE VIDEO
+        ========================================== */
 
         videoModal.addEventListener(
             "click",
             function(event) {
 
-                if (event.target === videoModal) {
 
-                    closeVideoModal();
-
-                }
-
-            }
-        );
-
-
-        /* -----------------------------------------
-           ESC KEY TO CLOSE
-        ----------------------------------------- */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
+                /*
+                 * If the visitor clicks the
+                 * dark area surrounding the
+                 * Vimeo video, close it.
+                 */
 
                 if (
-                    event.key === "Escape" &&
-                    videoModal.classList.contains("active")
+                    event.target ===
+                    videoModal
                 ) {
 
                     closeVideoModal();
@@ -802,8 +1118,35 @@
             }
         );
 
+
+
+        /* =========================================
+           ESC KEY
+        ========================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+
+                if (
+                    event.key === "Escape" &&
+                    videoModal.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    closeVideoModal();
+
+                }
+
+            }
+        );
+
+
     </script>
 
 
 </body>
+
 </html>
