@@ -170,10 +170,6 @@
 
             letter-spacing: 0.01em;
 
-            /*
-             * Soft, diffused shadow.
-             */
-
             text-shadow:
                 0 2px 16px rgba(0, 0, 0, 0.22);
 
@@ -246,12 +242,6 @@
 
             justify-content: center;
 
-            /*
-             * Increased from 270px to 330px
-             * so the Save the Date text
-             * stays on one line.
-             */
-
             width: 330px;
 
             padding: 13px 22px;
@@ -274,11 +264,6 @@
 
             text-align: center;
 
-            /*
-             * Prevents the button text
-             * from wrapping onto two lines.
-             */
-
             white-space: nowrap;
 
             border:
@@ -291,10 +276,6 @@
             backdrop-filter: blur(2px);
 
             -webkit-backdrop-filter: blur(2px);
-
-            /*
-             * Soft text separation.
-             */
 
             text-shadow:
                 0 2px 10px rgba(0, 0, 0, 0.20);
@@ -379,13 +360,6 @@
             justify-content: center;
 
             padding: 40px;
-
-            /*
-             * Dark cinematic overlay.
-             *
-             * The background video underneath
-             * will also be paused when this opens.
-             */
 
             background:
                 rgba(0, 0, 0, 0.92);
@@ -666,12 +640,6 @@
 
             .button {
 
-                /*
-                 * Keeps the button responsive
-                 * on smaller phones while
-                 * preventing text wrapping.
-                 */
-
                 width:
                     min(
                         330px,
@@ -771,7 +739,7 @@
 
 
         <!-- =====================================
-             BACKGROUND HERO VIDEO
+             NEW 1080P LOOPING BACKGROUND VIDEO
         ====================================== -->
 
         <video
@@ -784,7 +752,7 @@
         >
 
             <source
-                src="wedding-video.mp4"
+                src="anna-and-mitch-background-1080p-web.mp4"
                 type="video/mp4"
             >
 
@@ -968,11 +936,11 @@
 
 
         /* =========================================
-           VIMEO VIDEO URL
+           NEW VIMEO VIDEO URL
         ========================================== */
 
         const vimeoURL =
-            "https://player.vimeo.com/video/1224715561?h=3b9908be69&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
+            "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
 
 
 
@@ -998,9 +966,6 @@
                  * =================================
                  * PAUSE BACKGROUND VIDEO
                  * =================================
-                 *
-                 * The video stays on the exact
-                 * frame where it was paused.
                  */
 
                 backgroundVideo.pause();
@@ -1009,7 +974,7 @@
 
                 /*
                  * =================================
-                 * LOAD VIMEO VIDEO
+                 * LOAD NEW VIMEO VIDEO
                  * =================================
                  */
 
@@ -1068,9 +1033,6 @@
              * =================================
              * STOP VIMEO VIDEO
              * =================================
-             *
-             * Removing the source completely
-             * stops the video.
              */
 
             vimeoPlayer.src = "";
@@ -1081,10 +1043,6 @@
              * =================================
              * RESUME BACKGROUND VIDEO
              * =================================
-             *
-             * Because we never changed
-             * currentTime, the background video
-             * resumes exactly where it stopped.
              */
 
             backgroundVideo.play();
@@ -1112,12 +1070,6 @@
             "click",
             function(event) {
 
-
-                /*
-                 * If the visitor clicks the
-                 * dark area surrounding the
-                 * Vimeo video, close it.
-                 */
 
                 if (
                     event.target ===
