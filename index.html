@@ -1,1353 +1,1016 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
 
-<meta charset="UTF-8">
-
-<meta
+  <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
-<title>Anna and Mitch</title>
+  <title>Anna & Mitch</title>
 
-<link
-    rel="stylesheet"
-    href="https://use.typekit.net/anp5gec.css"
->
+  <!-- Adobe Fonts -->
+  <link rel="stylesheet" href="https://use.typekit.net/anp5gec.css">
 
+  <!-- Vimeo Player SDK -->
+  <script src="https://player.vimeo.com/api/player.js"></script>
 
-<style>
+  <style>
 
-/* =========================================================
-   RESET
-   ========================================================= */
+    /* =========================
+       BASIC RESET
+    ========================= */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-body {
-    background: #000;
-}
-
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-    height: 100svh;
-
-    overflow: hidden;
-
-    background: #000;
-}
-
-
-/* =========================================================
-   BACKGROUND VIDEO
-   ========================================================= */
-
-.hero-video {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    object-position: center center;
-
-    opacity: 0;
-
-    animation:
-        videoFadeIn
-        2.5s ease
-        forwards;
-}
-
-
-/* =========================================================
-   MOBILE WEBP FALLBACK
-   ========================================================= */
-
-.mobile-background {
-    display: none;
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    object-position: center center;
-
-    opacity: 0;
-
-    animation:
-        mobileFadeIn
-        1.5s ease
-        forwards;
-}
-
-
-/* =========================================================
-   CINEMATIC OVERLAY
-   ========================================================= */
-
-.overlay {
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.12) 0%,
-            rgba(0,0,0,.07) 45%,
-            rgba(0,0,0,.20) 100%
-        );
-
-    z-index: 1;
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   MAIN CONTENT
-   ========================================================= */
-
-.content {
-    position: absolute;
-
-    z-index: 2;
-
-    left: 50%;
-    top: 48%;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
-
-    width: 90%;
-
-    text-align: center;
-
-    color: white;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    opacity: 0;
-
-    animation:
-        contentFadeIn
-        1.8s ease
-        1.2s forwards;
-}
-
-
-/* =========================================================
-   NAMES
-   ========================================================= */
-
-.names {
-    font-family:
-        "aunt-mildred-mvb",
-        sans-serif;
-
-    font-weight: 400;
-
-    font-style: normal;
-
-    font-size:
-        clamp(
-            3.5rem,
-            6vw,
-            6.5rem
-        );
-
-    line-height: 1;
-
-    letter-spacing: .01em;
-
-    text-shadow:
-        0 2px 16px
-        rgba(0,0,0,.22);
-
-    margin-bottom: 20px;
-}
-
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
-.date {
-    font-family:
-        "legitima",
-        serif;
-
-    font-weight: 500;
-
-    font-style: normal;
-
-    font-size:
-        clamp(
-            1rem,
-            1.35vw,
-            1.35rem
-        );
-
-    letter-spacing: .18em;
-
-    text-shadow:
-        0 2px 12px
-        rgba(0,0,0,.22);
-
-    margin-bottom: 38px;
-}
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-.buttons {
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 13px;
-
-    width: 100%;
-}
-
-
-.button {
-    position: relative;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 330px;
-
-    padding: 13px 22px;
-
-    color: white;
-
-    text-decoration: none;
-
-    font-family:
-        "legitima",
-        serif;
-
-    font-weight: 500;
-
-    font-style: normal;
-
-    font-size: .82rem;
-
-    letter-spacing: .16em;
-
-    text-transform: uppercase;
-
-    text-align: center;
-
-    white-space: nowrap;
-
-    border:
-        1px solid
-        rgba(255,255,255,.65);
-
-    background:
-        rgba(0,0,0,.08);
-
-    backdrop-filter:
-        blur(2px);
-
-    -webkit-backdrop-filter:
-        blur(2px);
-
-    text-shadow:
-        0 2px 10px
-        rgba(0,0,0,.20);
-
-    transition:
-        background .4s ease,
-        border-color .4s ease,
-        transform .4s ease;
-}
-
-
-.button::after {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: -1px;
-
-    width: 0;
-
-    height: 1px;
-
-    background: white;
-
-    transform:
-        translateX(-50%);
-
-    transition:
-        width .4s ease;
-}
-
-
-.button:hover {
-    background:
-        rgba(255,255,255,.13);
-
-    border-color:
-        rgba(255,255,255,.95);
-
-    transform:
-        translateY(-2px);
-}
-
-
-.button:hover::after {
-    width: 70%;
-}
-
-
-/* =========================================================
-   LOCATION
-   ========================================================= */
-
-.location {
-    position: absolute;
-
-    z-index: 2;
-
-    left: 50%;
-
-    bottom: 7%;
-
-    transform:
-        translateX(-50%);
-
-    width: 90%;
-
-    text-align: center;
-
-    color: white;
-
-    opacity: 0;
-
-    animation:
-        locationFadeIn
-        1.8s ease
-        1.6s forwards;
-}
-
-
-.location-name {
-    font-family:
-        "aunt-mildred-mvb",
-        sans-serif;
-
-    font-weight: 400;
-
-    font-style: italic;
-
-    font-size:
-        clamp(
-            2rem,
-            3.2vw,
-            3.5rem
-        );
-
-    line-height: 1;
-
-    letter-spacing: .08em;
-
-    font-variant-caps:
-        small-caps;
-
-    font-feature-settings:
-        "smcp" 1;
-
-    text-shadow:
-        0 2px 14px
-        rgba(0,0,0,.20);
-
-    margin-bottom: 8px;
-}
-
-
-.location-state {
-    font-family:
-        "legitima",
-        serif;
-
-    font-weight: 500;
-
-    font-style: normal;
-
-    font-size:
-        clamp(
-            .75rem,
-            1vw,
-            1rem
-        );
-
-    letter-spacing: .18em;
-
-    text-shadow:
-        0 2px 12px
-        rgba(0,0,0,.20);
-}
-
-
-/* =========================================================
-   VIMEO MODAL
-   ========================================================= */
-
-.video-modal {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 10;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 40px;
-
-    background:
-        rgba(0,0,0,.92);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity .5s ease,
-        visibility .5s ease;
-}
-
-
-.video-modal.active {
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-
-.video-container {
-    position: relative;
-
-    width:
-        min(
-            1200px,
-            90vw
-        );
-
-    aspect-ratio: 16 / 9;
-
-    background: #000;
-
-    box-shadow:
-        0 20px 80px
-        rgba(0,0,0,.55);
-
-    transform:
-        scale(.96);
-
-    transition:
-        transform .6s ease;
-}
-
-
-.video-container iframe {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    border: 0;
-}
-
-
-.close-video {
-    position: fixed;
-
-    top: 28px;
-
-    right: 32px;
-
-    z-index: 11;
-
-    width: 42px;
-
-    height: 42px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.55);
-
-    border-radius: 50%;
-
-    background:
-        rgba(0,0,0,.15);
-
-    color: white;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 25px;
-
-    font-weight: 200;
-
-    line-height: 1;
-
-    cursor: pointer;
-
-    transition:
-        background .3s ease,
-        border-color .3s ease,
-        transform .3s ease;
-}
-
-
-.close-video:hover {
-    background:
-        rgba(255,255,255,.15);
-
-    border-color:
-        rgba(255,255,255,.9);
-
-    transform:
-        rotate(90deg);
-}
-
-
-.video-modal.active
-.video-container {
-    transform:
-        scale(1);
-}
-
-
-/* =========================================================
-   ANIMATIONS
-   ========================================================= */
-
-@keyframes videoFadeIn {
-
-    from {
-        opacity: 0;
+    * {
+      box-sizing: border-box;
     }
 
-    to {
-        opacity: 1;
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
     }
 
-}
-
-
-@keyframes mobileFadeIn {
-
-    from {
-        opacity: 0;
+    body {
+      font-family: legitima, serif;
     }
 
-    to {
-        opacity: 1;
+
+    /* =========================
+       BACKGROUND VIDEO
+    ========================= */
+
+    .hero-video,
+    .mobile-background {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      background: #000;
     }
 
-}
-
-
-@keyframes contentFadeIn {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate(
-                -50%,
-                calc(-50% + 15px)
-            );
+    .mobile-background {
+      display: none;
     }
 
-    to {
-        opacity: 1;
 
-        transform:
-            translate(
-                -50%,
-                -50%
-            );
+    /* =========================
+       DARK CINEMATIC OVERLAY
+    ========================= */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.20);
+      pointer-events: none;
     }
 
-}
 
-
-@keyframes locationFadeIn {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate(
-                -50%,
-                10px
-            );
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translate(
-                -50%,
-                0
-            );
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
+    /* =========================
+       MAIN CONTENT
+    ========================= */
 
     .content {
-        top: 47%;
+      position: relative;
+      z-index: 2;
 
-        width: 92%;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 30px;
+      color: #fff;
+
+      animation: fadeIn 1.8s ease-out both;
     }
 
+
+    /* =========================
+       NAMES
+    ========================= */
 
     .names {
-        font-size:
-            clamp(
-                3.1rem,
-                13vw,
-                4.5rem
-            );
+      margin: 0;
 
-        margin-bottom: 16px;
+      font-family: "aunt-mildred-mvb", sans-serif;
+      font-weight: 400;
+      font-style: normal;
 
-        text-shadow:
-            0 2px 14px
-            rgba(0,0,0,.22);
+      font-size: clamp(64px, 10vw, 150px);
+      line-height: 0.9;
+
+      letter-spacing: -0.02em;
+
+      text-shadow:
+        0 2px 20px rgba(0, 0, 0, 0.25);
     }
 
+
+    /* =========================
+       DATE
+    ========================= */
 
     .date {
-        font-size: .9rem;
+      margin-top: 24px;
 
-        letter-spacing: .14em;
+      font-family: legitima, serif;
+      font-weight: 500;
+      font-style: normal;
 
-        margin-bottom: 32px;
+      font-size: clamp(19px, 2.1vw, 28px);
+      letter-spacing: 0.08em;
+
+      text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.35);
     }
 
+
+    /* =========================
+       BUTTONS
+    ========================= */
 
     .buttons {
-        gap: 12px;
-    }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
+      gap: 14px;
+
+      margin-top: 38px;
+    }
 
     .button {
-        width:
-            min(
-                330px,
-                90vw
-            );
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-        padding:
-            13px 18px;
+      min-width: 280px;
 
-        font-size: .78rem;
+      padding: 13px 24px;
 
-        white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+
+      background: rgba(0, 0, 0, 0.08);
+
+      color: #fff;
+
+      font-family: legitima, serif;
+      font-weight: 500;
+      font-style: normal;
+
+      font-size: 17px;
+      letter-spacing: 0.04em;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+
+      white-space: nowrap;
+
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
     }
 
+    .button:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 1);
+      transform: translateY(-2px);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+
+    /* =========================
+       LOCATION
+    ========================= */
 
     .location {
-        bottom: 5%;
+      position: absolute;
+
+      bottom: 28px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      color: #fff;
+
+      text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.35);
     }
 
+    .location-main {
+      font-family: "aunt-mildred-mvb", sans-serif;
+      font-weight: 400;
+      font-style: italic;
 
-    .location-name {
-        font-size:
-            clamp(
-                1.8rem,
-                8vw,
-                2.5rem
-            );
+      font-variant-caps: small-caps;
+      font-feature-settings: "smcp" 1;
 
-        letter-spacing: .06em;
-
-        margin-bottom: 6px;
+      font-size: 25px;
+      line-height: 1;
     }
-
 
     .location-state {
-        font-size: .7rem;
+      margin-top: 5px;
 
-        letter-spacing: .16em;
+      font-family: legitima, serif;
+      font-weight: 500;
+      font-style: normal;
+
+      font-size: 11px;
+      letter-spacing: 0.28em;
     }
 
+
+    /* =========================
+       VIDEO MODAL
+    ========================= */
 
     .video-modal {
-        padding: 20px;
+      position: fixed;
+      inset: 0;
+
+      z-index: 10;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(0, 0, 0, 0.94);
+
+      padding: 30px;
     }
 
+    .video-modal.active {
+      display: flex;
+    }
+
+
+    /* =========================
+       VIDEO CONTAINER
+    ========================= */
 
     .video-container {
-        width: 94vw;
+      position: relative;
 
-        aspect-ratio: 16 / 9;
+      width: min(92vw, 1200px);
+      aspect-ratio: 16 / 9;
+
+      background: #000;
+
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.55);
     }
 
+
+    /* =========================
+       VIMEO IFRAME
+    ========================= */
+
+    .video-container iframe {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      border: 0;
+    }
+
+
+    /* =========================
+       CLOSE BUTTON
+    ========================= */
 
     .close-video {
-        top: 18px;
+      position: absolute;
 
-        right: 18px;
+      top: -48px;
+      right: 0;
 
-        width: 38px;
+      width: 38px;
+      height: 38px;
 
-        height: 38px;
+      border: 0;
+      background: transparent;
 
+      color: #fff;
+
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      font-weight: 200;
+      line-height: 1;
+
+      cursor: pointer;
+
+      opacity: 0.85;
+
+      z-index: 20;
+
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .close-video:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+
+    /* =========================
+       CUSTOM FULLSCREEN BUTTON
+    ========================= */
+
+    .fullscreen-video {
+      position: absolute;
+
+      top: 16px;
+      right: 16px;
+
+      width: 42px;
+      height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0;
+
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 50%;
+
+      background: rgba(0, 0, 0, 0.28);
+
+      color: #fff;
+
+      cursor: pointer;
+
+      z-index: 20;
+
+      opacity: 0.9;
+
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .fullscreen-video:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 1);
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .fullscreen-video svg {
+      width: 18px;
+      height: 18px;
+
+      fill: none;
+
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .overlay {
+        background: rgba(0, 0, 0, 0.18);
+      }
+
+      .content {
+        padding:
+          30px
+          20px
+          70px;
+      }
+
+      .names {
+        font-size: clamp(56px, 17vw, 90px);
+      }
+
+      .date {
+        margin-top: 20px;
+        font-size: 19px;
+      }
+
+      .buttons {
+        margin-top: 34px;
+        gap: 12px;
+      }
+
+      .button {
+        min-width: 270px;
+        padding: 12px 18px;
+        font-size: 16px;
+      }
+
+      .location {
+        bottom: 23px;
+      }
+
+      .location-main {
         font-size: 22px;
+      }
+
+      .location-state {
+        font-size: 10px;
+      }
+
+
+      /* Video modal on phones */
+
+      .video-modal {
+        padding: 16px;
+      }
+
+      .video-container {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+      }
+
+      .close-video {
+        top: -46px;
+        right: -2px;
+      }
+
+      .fullscreen-video {
+        top: 12px;
+        right: 12px;
+
+        width: 40px;
+        height: 40px;
+      }
     }
 
-}
 
+    /* =========================
+       FADE IN
+    ========================= */
 
-/* =========================================================
-   SHORT MOBILE SCREENS
-   ========================================================= */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
 
-@media (max-height: 700px)
-and (max-width: 700px) {
-
-    .content {
-        top: 46%;
+      to {
+        opacity: 1;
+      }
     }
 
-
-    .names {
-        font-size: 3rem;
-
-        margin-bottom: 12px;
-    }
-
-
-    .date {
-        margin-bottom: 24px;
-    }
-
-
-    .location {
-        bottom: 4%;
-    }
-
-}
-
-</style>
-
+  </style>
 </head>
 
 
 <body>
 
+  <!-- =========================
+       BACKGROUND
+  ========================= -->
 
-<main class="hero">
+  <video
+    class="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="auto"
+  ></video>
 
+  <img
+    class="mobile-background"
+    alt=""
+  >
 
-    <!-- =====================================================
-         BACKGROUND VIDEO
-
-         Desktop:
-         Landscape MP4
-
-         Mobile:
-         Vertical MP4
-
-         Low Power Mode:
-         Animated WebP fallback
-         ===================================================== -->
-
-    <video
-        class="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        webkit-playsinline
-        preload="auto"
-    ></video>
+  <div class="overlay"></div>
 
 
-    <!-- =====================================================
-         MOBILE WEBP FALLBACK
-         ===================================================== -->
+  <!-- =========================
+       MAIN CONTENT
+  ========================= -->
 
-    <img
-        class="mobile-background"
-        data-src="anna-and-mitch-background-mobile-480x854.webp"
-        alt=""
-    >
+  <main class="content">
 
+    <h1 class="names">
+      Anna and Mitch
+    </h1>
 
-    <!-- =====================================================
-         CINEMATIC OVERLAY
-         ===================================================== -->
+    <div class="date">
+      September 26, 2027
+    </div>
 
-    <div class="overlay"></div>
+    <div class="buttons">
 
+      <button
+        class="button"
+        id="watch-video"
+        type="button"
+      >
+        Watch Our Save the Date Video
+      </button>
 
-    <!-- =====================================================
-         MAIN CONTENT
-         ===================================================== -->
-
-    <section class="content">
-
-
-        <h1 class="names">
-            Anna and Mitch
-        </h1>
-
-
-        <div class="date">
-            September 26, 2027
-        </div>
-
-
-        <div class="buttons">
-
-
-            <a
-                href="#"
-                class="button"
-                id="watch-video"
-            >
-                Watch Our Save the Date Video
-            </a>
-
-
-            <a
-                href="https://www.zola.com/wedding/annaandmitch926"
-                class="button"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Enter Website
-            </a>
-
-
-        </div>
-
-
-    </section>
-
-
-    <!-- =====================================================
-         LOCATION
-         ===================================================== -->
-
-    <section class="location">
-
-
-        <div class="location-name">
-            Estes Park
-        </div>
-
-
-        <div class="location-state">
-            COLORADO
-        </div>
-
-
-    </section>
-
-
-</main>
-
-
-<!-- =========================================================
-     VIMEO VIDEO MODAL
-     ========================================================= -->
-
-<div
-    class="video-modal"
-    id="video-modal"
-    aria-hidden="true"
->
-
-
-    <button
-        class="close-video"
-        id="close-video"
-        aria-label="Close video"
-    >
-        ×
-    </button>
-
-
-    <div class="video-container">
-
-
-        <iframe
-            id="vimeo-player"
-            src=""
-            title="Anna and Mitch Save the Date"
-
-            allow="autoplay; fullscreen; picture-in-picture"
-
-            webkitallowfullscreen
-            mozallowfullscreen
-            allowfullscreen
-        ></iframe>
-
+      <a
+        class="button"
+        href="https://www.zola.com/wedding/annaandmitch926"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Enter Website
+      </a>
 
     </div>
 
 
-</div>
+    <div class="location">
+
+      <div class="location-main">
+        Estes Park
+      </div>
+
+      <div class="location-state">
+        COLORADO
+      </div>
+
+    </div>
+
+  </main>
 
 
-<script>
+  <!-- =========================
+       VIDEO MODAL
+  ========================= -->
+
+  <div
+    class="video-modal"
+    id="video-modal"
+    aria-hidden="true"
+  >
+
+    <div class="video-container">
+
+      <!-- Close -->
+      <button
+        class="close-video"
+        id="close-video"
+        type="button"
+        aria-label="Close video"
+      >
+        ×
+      </button>
 
 
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+      <!-- Custom fullscreen -->
+      <button
+        class="fullscreen-video"
+        id="fullscreen-video"
+        type="button"
+        aria-label="Enter fullscreen"
+        title="Fullscreen"
+      >
 
-const backgroundVideo =
-    document.querySelector(
-        ".hero-video"
-    );
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M3 9V3h6"></path>
+          <path d="M15 3h6v6"></path>
+          <path d="M21 15v6h-6"></path>
+          <path d="M9 21H3v-6"></path>
+        </svg>
 
-
-const mobileBackground =
-    document.querySelector(
-        ".mobile-background"
-    );
-
-
-const watchVideo =
-    document.getElementById(
-        "watch-video"
-    );
-
-
-const videoModal =
-    document.getElementById(
-        "video-modal"
-    );
+      </button>
 
 
-const closeVideo =
-    document.getElementById(
-        "close-video"
-    );
+      <!-- Vimeo -->
+      <iframe
+        id="vimeo-player"
+        title="Anna and Mitch Save the Date"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+      ></iframe>
+
+    </div>
+
+  </div>
 
 
-const vimeoPlayer =
-    document.getElementById(
-        "vimeo-player"
-    );
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       BACKGROUND VIDEO
+    ========================= */
+
+    const backgroundVideo =
+      document.querySelector(".hero-video");
+
+    const mobileBackground =
+      document.querySelector(".mobile-background");
+
+    const isMobile =
+      window.matchMedia("(max-width: 700px)").matches;
+
+    const desktopVideo =
+      "anna-and-mitch-background-1080p-web.mp4";
+
+    const mobileVideo =
+      "anna-and-mitch-background-mobile-1080x1920.mp4";
+
+    const mobileWebP =
+      "anna-and-mitch-background-mobile-480x854.webp";
 
 
-/* =========================================================
-   VIDEO FILES
-   ========================================================= */
-
-const desktopVideo =
-    "anna-and-mitch-background-1080p-web.mp4";
-
-
-const mobileVideo =
-    "anna-and-mitch-background-mobile-1080x1920.mp4";
-
-
-const mobileWebP =
-    "anna-and-mitch-background-mobile-480x854.webp";
-
-
-/* =========================================================
-   VIMEO URL
-
-   fullscreen=1 explicitly enables Vimeo's fullscreen
-   control.
-   ========================================================= */
-
-const vimeoURL =
-    "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&fullscreen=1&dnt=1";
-
-
-/* =========================================================
-   DETECT MOBILE
-   ========================================================= */
-
-const isMobile =
-    window.matchMedia(
-        "(max-width: 700px)"
-    ).matches;
-
-
-/* =========================================================
-   SELECT CORRECT BACKGROUND VIDEO
-   ========================================================= */
-
-if (isMobile) {
-
-    backgroundVideo.src =
-        mobileVideo;
-
-} else {
-
-    backgroundVideo.src =
-        desktopVideo;
-
-}
-
-
-/* =========================================================
-   MOBILE WEBP FALLBACK
-   ========================================================= */
-
-function switchToMobileFallback() {
-
-    if (!isMobile) {
-        return;
+    if (isMobile) {
+      backgroundVideo.src = mobileVideo;
+    } else {
+      backgroundVideo.src = desktopVideo;
     }
 
 
-    if (
-        mobileBackground.style.display ===
-        "block"
-    ) {
+    function switchToMobileFallback() {
+
+      if (!isMobile) return;
+
+      if (mobileBackground.style.display === "block") {
         return;
+      }
+
+      mobileBackground.src = mobileWebP;
+
+      backgroundVideo.style.display = "none";
+
+      mobileBackground.style.display = "block";
     }
 
 
-    /*
-       Only load the WebP when needed.
-    */
+    function tryBackgroundVideo() {
 
-    mobileBackground.src =
-        mobileWebP;
-
-
-    /*
-       Hide the MP4.
-    */
-
-    backgroundVideo.style.display =
-        "none";
-
-
-    /*
-       Show the WebP.
-    */
-
-    mobileBackground.style.display =
-        "block";
-
-}
-
-
-/* =========================================================
-   TRY TO PLAY BACKGROUND VIDEO
-   ========================================================= */
-
-function tryBackgroundVideo() {
-
-    const playPromise =
+      const playPromise =
         backgroundVideo.play();
 
+      if (playPromise !== undefined) {
 
-    if (
-        playPromise !== undefined
-    ) {
+        playPromise.catch(function() {
 
-        playPromise.catch(
-            function() {
+          switchToMobileFallback();
 
-                /*
-                   Autoplay was rejected.
+        });
 
-                   On mobile this is where we
-                   switch to the WebP.
-                */
-
-                switchToMobileFallback();
-
-            }
-        );
+      }
 
     }
 
-}
 
+    if (backgroundVideo.readyState >= 2) {
 
-/* =========================================================
-   START BACKGROUND VIDEO
-   ========================================================= */
+      tryBackgroundVideo();
 
-if (
-    backgroundVideo.readyState >= 2
-) {
+    } else {
 
-    tryBackgroundVideo();
-
-} else {
-
-    backgroundVideo.addEventListener(
+      backgroundVideo.addEventListener(
         "canplay",
         tryBackgroundVideo,
-        {
-            once: true
-        }
-    );
-
-}
-
-
-/* =========================================================
-   OPEN VIMEO
-   ========================================================= */
-
-watchVideo.addEventListener(
-    "click",
-    function(event) {
-
-        event.preventDefault();
-
-
-        /*
-           Pause the background MP4.
-        */
-
-        if (
-            backgroundVideo.style.display !==
-            "none"
-        ) {
-
-            backgroundVideo.pause();
-
-        }
-
-
-        /*
-           Hide WebP fallback while Vimeo is open.
-        */
-
-        if (
-            mobileBackground.style.display ===
-            "block"
-        ) {
-
-            mobileBackground.style.visibility =
-                "hidden";
-
-        }
-
-
-        /*
-           Load Vimeo.
-        */
-
-        vimeoPlayer.src =
-            vimeoURL;
-
-
-        videoModal.classList.add(
-            "active"
-        );
-
-
-        videoModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
+        { once: true }
+      );
 
     }
-);
 
 
-/* =========================================================
-   CLOSE VIMEO
-   ========================================================= */
+    /* =========================
+       VIMEO
+    ========================= */
 
-function closeVideoModal() {
+    const videoModal =
+      document.getElementById("video-modal");
 
-    videoModal.classList.remove(
-        "active"
-    );
+    const watchVideo =
+      document.getElementById("watch-video");
+
+    const closeVideo =
+      document.getElementById("close-video");
+
+    const fullscreenVideo =
+      document.getElementById("fullscreen-video");
+
+    const vimeoIframe =
+      document.getElementById("vimeo-player");
 
 
-    videoModal.setAttribute(
+    /*
+      IMPORTANT:
+      No fullscreen=1 here.
+
+      That means Vimeo won't force its own
+      fullscreen experience or put its native
+      fullscreen control front-and-center.
+    */
+
+    const vimeoURL =
+      "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
+
+
+    let vimeoPlayer = null;
+
+
+    /* =========================
+       OPEN VIDEO
+    ========================= */
+
+    watchVideo.addEventListener("click", function() {
+
+      /* Pause background */
+
+      if (
+        backgroundVideo.style.display !== "none" &&
+        !backgroundVideo.paused
+      ) {
+        backgroundVideo.pause();
+      }
+
+
+      /* Hide fallback */
+
+      if (
+        mobileBackground.style.display === "block"
+      ) {
+        mobileBackground.style.display = "none";
+      }
+
+
+      /* Load Vimeo */
+
+      vimeoIframe.src = vimeoURL;
+
+
+      /* Show modal */
+
+      videoModal.classList.add("active");
+
+      videoModal.setAttribute(
         "aria-hidden",
-        "true"
-    );
+        "false"
+      );
 
 
-    /*
-       Stop Vimeo completely.
-    */
+      /*
+        Create Vimeo Player API instance.
 
-    vimeoPlayer.src = "";
+        This gives our custom fullscreen
+        button direct access to Vimeo's
+        fullscreen function.
+      */
 
-
-    /*
-       If WebP is active, show it again.
-    */
-
-    if (
-        mobileBackground.style.display ===
-        "block"
-    ) {
-
-        mobileBackground.style.visibility =
-            "visible";
-
-        return;
-
-    }
+      vimeoPlayer =
+        new Vimeo.Player(vimeoIframe);
 
 
-    /*
-       Otherwise resume the background MP4.
-    */
+      /*
+        Make sure the video plays once
+        Vimeo is ready.
+      */
 
-    backgroundVideo
-        .play()
-        .catch(
-            function() {
+      vimeoPlayer.ready().then(function() {
 
-                switchToMobileFallback();
+        vimeoPlayer.play().catch(function() {
+          /* Browser can still require manual play */
+        });
+
+      });
+
+    });
+
+
+    /* =========================
+       CUSTOM FULLSCREEN
+    ========================= */
+
+    fullscreenVideo.addEventListener(
+      "click",
+      function() {
+
+        if (!vimeoPlayer) return;
+
+
+        vimeoPlayer
+          .getFullscreen()
+          .then(function(isFullscreen) {
+
+            if (isFullscreen) {
+
+              return vimeoPlayer.exitFullscreen();
+
+            } else {
+
+              return vimeoPlayer.requestFullscreen();
 
             }
-        );
 
-}
+          })
+          .catch(function(error) {
+
+            console.log(
+              "Fullscreen unavailable:",
+              error
+            );
+
+          });
+
+      }
+    );
 
 
-/* =========================================================
-   CLOSE BUTTON
-   ========================================================= */
+    /* =========================
+       CLOSE VIDEO
+    ========================= */
 
-closeVideo.addEventListener(
-    "click",
-    closeVideoModal
-);
+    function closeVideoModal() {
+
+      /*
+        Stop Vimeo completely.
+      */
+
+      if (vimeoPlayer) {
+
+        vimeoPlayer.pause().catch(function() {});
+
+      }
 
 
-/* =========================================================
-   CLICK OUTSIDE VIDEO
-   ========================================================= */
+      /*
+        Remove Vimeo iframe source.
 
-videoModal.addEventListener(
-    "click",
-    function(event) {
+        This prevents the video/audio from
+        continuing after closing.
+      */
+
+      vimeoIframe.src = "";
+
+
+      /*
+        Destroy Vimeo Player API instance.
+      */
+
+      if (vimeoPlayer) {
+
+        vimeoPlayer.destroy().catch(function() {});
+
+        vimeoPlayer = null;
+
+      }
+
+
+      /*
+        Hide modal.
+      */
+
+      videoModal.classList.remove("active");
+
+      videoModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      /*
+        Restore background.
+
+        If we're using the WebP fallback,
+        show that again.
+
+        Otherwise resume the video.
+      */
+
+      if (isMobile) {
 
         if (
-            event.target === videoModal
+          mobileBackground.src &&
+          mobileBackground.style.display === "none"
         ) {
 
-            closeVideoModal();
+          /*
+            If fallback had previously been
+            activated, restore it.
+          */
+
+          if (
+            backgroundVideo.style.display === "none"
+          ) {
+
+            mobileBackground.style.display =
+              "block";
+
+          }
+
+        } else {
+
+          backgroundVideo.style.display =
+            "block";
+
+          backgroundVideo.play().catch(function() {});
 
         }
 
+      } else {
+
+        backgroundVideo.style.display =
+          "block";
+
+        backgroundVideo.play().catch(function() {});
+
+      }
+
     }
-);
 
 
-/* =========================================================
-   ESCAPE KEY
-   ========================================================= */
+    closeVideo.addEventListener(
+      "click",
+      closeVideoModal
+    );
 
-document.addEventListener(
-    "keydown",
-    function(event) {
+
+    /* =========================
+       CLICK OUTSIDE VIDEO
+    ========================= */
+
+    videoModal.addEventListener(
+      "click",
+      function(event) {
 
         if (
-            event.key === "Escape" &&
-            videoModal.classList.contains(
-                "active"
-            )
+          event.target === videoModal
+        ) {
+          closeVideoModal();
+        }
+
+      }
+    );
+
+
+    /* =========================
+       ESC KEY
+    ========================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Escape" &&
+          videoModal.classList.contains("active")
         ) {
 
-            closeVideoModal();
+          closeVideoModal();
 
         }
 
-    }
-);
+      }
+    );
 
-
-</script>
-
+  </script>
 
 </body>
-
 </html>
