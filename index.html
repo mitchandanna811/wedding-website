@@ -741,16 +741,18 @@
 
 
     /*
-      IMPORTANT:
-      No fullscreen=1 here.
+      Simplified Vimeo player.
 
-      That means Vimeo won't force its own
-      fullscreen experience or put its native
-      fullscreen control front-and-center.
+      IMPORTANT:
+      No fullscreen=1.
+
+      cc=0 tells Vimeo not to enable
+      the closed-caption control where
+      the parameter is supported.
     */
 
     const vimeoURL =
-      "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
+      "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&dnt=1&cc=0";
 
 
     let vimeoPlayer = null;
@@ -796,27 +798,18 @@
       );
 
 
-      /*
-        Create Vimeo Player API instance.
-
-        This gives our custom fullscreen
-        button direct access to Vimeo's
-        fullscreen function.
-      */
+      /* Create Vimeo Player */
 
       vimeoPlayer =
         new Vimeo.Player(vimeoIframe);
 
 
-      /*
-        Make sure the video plays once
-        Vimeo is ready.
-      */
+      /* Start playback */
 
       vimeoPlayer.ready().then(function() {
 
         vimeoPlayer.play().catch(function() {
-          /* Browser can still require manual play */
+          /* Browser may require manual play */
         });
 
       });
@@ -833,7 +826,6 @@
       function() {
 
         if (!vimeoPlayer) return;
-
 
         vimeoPlayer
           .getFullscreen()
@@ -869,9 +861,7 @@
 
     function closeVideoModal() {
 
-      /*
-        Stop Vimeo completely.
-      */
+      /* Stop Vimeo */
 
       if (vimeoPlayer) {
 
@@ -880,19 +870,12 @@
       }
 
 
-      /*
-        Remove Vimeo iframe source.
-
-        This prevents the video/audio from
-        continuing after closing.
-      */
+      /* Remove Vimeo */
 
       vimeoIframe.src = "";
 
 
-      /*
-        Destroy Vimeo Player API instance.
-      */
+      /* Destroy Vimeo API */
 
       if (vimeoPlayer) {
 
@@ -903,9 +886,7 @@
       }
 
 
-      /*
-        Hide modal.
-      */
+      /* Hide modal */
 
       videoModal.classList.remove("active");
 
@@ -915,35 +896,20 @@
       );
 
 
-      /*
-        Restore background.
-
-        If we're using the WebP fallback,
-        show that again.
-
-        Otherwise resume the video.
-      */
+      /* Restore background */
 
       if (isMobile) {
 
         if (
-          mobileBackground.src &&
-          mobileBackground.style.display === "none"
+          backgroundVideo.style.display === "none"
         ) {
 
           /*
-            If fallback had previously been
-            activated, restore it.
+            We were using the WebP fallback.
           */
 
-          if (
-            backgroundVideo.style.display === "none"
-          ) {
-
-            mobileBackground.style.display =
-              "block";
-
-          }
+          mobileBackground.style.display =
+            "block";
 
         } else {
 
@@ -983,7 +949,9 @@
         if (
           event.target === videoModal
         ) {
+
           closeVideoModal();
+
         }
 
       }
