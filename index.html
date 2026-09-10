@@ -30,14 +30,12 @@
     padding: 0;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
-
 
 body {
     background: #000;
@@ -678,6 +676,7 @@ body {
 
     .content {
         top: 47%;
+
         width: 92%;
     }
 
@@ -825,12 +824,16 @@ and (max-width: 700px) {
     <!-- =====================================================
          BACKGROUND VIDEO
 
-         This is ALWAYS the preferred background.
+         JavaScript chooses:
 
-         If Safari allows autoplay, this plays.
+         DESKTOP:
+         anna-and-mitch-background-1080p-web.mp4
 
-         If Safari rejects autoplay, JavaScript switches
-         to the animated WebP below.
+         MOBILE:
+         anna-and-mitch-background-mobile-1080x1920.mp4
+
+         If mobile autoplay is rejected, the WebP fallback
+         is loaded automatically.
          ===================================================== -->
 
     <video
@@ -841,22 +844,14 @@ and (max-width: 700px) {
         playsinline
         webkit-playsinline
         preload="auto"
-    >
-
-        <source
-            src="anna-and-mitch-background-1080p-web.mp4"
-            type="video/mp4"
-        >
-
-    </video>
+    ></video>
 
 
     <!-- =====================================================
          MOBILE WEBP FALLBACK
 
-         The source is intentionally stored in data-src
-         so the WebP is NOT downloaded unless the MP4
-         autoplay fails.
+         This stays unloaded unless the mobile MP4
+         cannot autoplay.
          ===================================================== -->
 
     <img
@@ -1023,6 +1018,22 @@ const vimeoPlayer =
 
 
 /* =========================================================
+   VIDEO FILES
+   ========================================================= */
+
+const desktopVideo =
+    "anna-and-mitch-background-1080p-web.mp4";
+
+
+const mobileVideo =
+    "anna-and-mitch-background-mobile-1080x1920.mp4";
+
+
+const mobileWebP =
+    "anna-and-mitch-background-mobile-480x854.webp";
+
+
+/* =========================================================
    VIMEO URL
    ========================================================= */
 
@@ -1031,40 +1042,69 @@ const vimeoURL =
 
 
 /* =========================================================
-   MOBILE FALLBACK
+   DETECT MOBILE
+   ========================================================= */
+
+const isMobile =
+    window.matchMedia(
+        "(max-width: 700px)"
+    ).matches;
+
+
+/* =========================================================
+   SELECT THE CORRECT MP4
+   ========================================================= */
+
+if (isMobile) {
+
+    backgroundVideo.src =
+        mobileVideo;
+
+} else {
+
+    backgroundVideo.src =
+        desktopVideo;
+
+}
+
+
+/* =========================================================
+   MOBILE WEBP FALLBACK
    ========================================================= */
 
 function switchToMobileFallback() {
 
     /*
-       Don't do anything if the fallback
-       is already active.
+       Only use this on mobile.
+    */
+
+    if (!isMobile) {
+        return;
+    }
+
+
+    /*
+       Prevent running twice.
     */
 
     if (
-        mobileBackground.style.display === "block"
+        mobileBackground.style.display ===
+        "block"
     ) {
         return;
     }
 
 
     /*
-       Load the WebP only now.
-
-       This means users whose MP4 works
-       never have to download the WebP.
+       Load the WebP only when needed.
     */
 
-    const fallbackSource =
-        mobileBackground.dataset.src;
-
-
     mobileBackground.src =
-        fallbackSource;
+        mobileWebP;
 
 
     /*
-       Hide the failed video.
+       Hide the mobile MP4.
     */
 
     backgroundVideo.style.display =
@@ -1082,23 +1122,18 @@ function switchToMobileFallback() {
 
 
 /* =========================================================
-   TRY TO PLAY THE NORMAL VIDEO
+   TRY TO PLAY THE SELECTED VIDEO
    ========================================================= */
 
 function tryBackgroundVideo() {
 
-    /*
-       Ask Safari to actually start playback.
-
-       In normal conditions this Promise resolves.
-
-       In iOS Low Power Mode, Safari can reject
-       the request because autoplay is disabled.
-    */
-
     const playPromise =
         backgroundVideo.play();
 
+
+    /*
+       Safari returns a Promise from play().
+    */
 
     if (
         playPromise !== undefined
@@ -1108,9 +1143,11 @@ function tryBackgroundVideo() {
             function() {
 
                 /*
-                   Autoplay failed.
+                   On mobile, this normally means
+                   autoplay was blocked — including
+                   Low Power Mode.
 
-                   Use the animated WebP instead.
+                   Switch to WebP.
                 */
 
                 switchToMobileFallback();
@@ -1124,7 +1161,7 @@ function tryBackgroundVideo() {
 
 
 /* =========================================================
-   START BACKGROUND
+   START BACKGROUND VIDEO
    ========================================================= */
 
 if (
@@ -1158,11 +1195,12 @@ watchVideo.addEventListener(
 
 
         /*
-           Pause the MP4 if it's playing.
+           Stop the MP4 if it is playing.
         */
 
         if (
-            backgroundVideo.style.display !== "none"
+            backgroundVideo.style.display !==
+            "none"
         ) {
 
             backgroundVideo.pause();
@@ -1171,12 +1209,12 @@ watchVideo.addEventListener(
 
 
         /*
-           The WebP fallback cannot be paused
-           like a video, so temporarily hide it.
+           Hide the WebP while Vimeo is open.
         */
 
         if (
-            mobileBackground.style.display === "block"
+            mobileBackground.style.display ===
+            "block"
         ) {
 
             mobileBackground.style.visibility =
@@ -1213,7 +1251,6 @@ watchVideo.addEventListener(
 
 function closeVideoModal() {
 
-
     videoModal.classList.remove(
         "active"
     );
@@ -1226,19 +1263,19 @@ function closeVideoModal() {
 
 
     /*
-       Stop Vimeo completely.
+       Stop Vimeo.
     */
 
     vimeoPlayer.src = "";
 
 
     /*
-       If the WebP fallback is active,
-       show it again.
+       If WebP is being used, show it again.
     */
 
     if (
-        mobileBackground.style.display === "block"
+        mobileBackground.style.display ===
+        "block"
     ) {
 
         mobileBackground.style.visibility =
@@ -1250,8 +1287,7 @@ function closeVideoModal() {
 
 
     /*
-       Otherwise resume the normal
-       background MP4.
+       Otherwise resume the appropriate MP4.
     */
 
     backgroundVideo
@@ -1260,8 +1296,8 @@ function closeVideoModal() {
             function() {
 
                 /*
-                   If playback somehow becomes
-                   unavailable, use the fallback.
+                   If mobile autoplay is no longer
+                   allowed, use WebP.
                 */
 
                 switchToMobileFallback();
