@@ -824,16 +824,14 @@ and (max-width: 700px) {
     <!-- =====================================================
          BACKGROUND VIDEO
 
-         JavaScript chooses:
+         Desktop:
+         Landscape MP4
 
-         DESKTOP:
-         anna-and-mitch-background-1080p-web.mp4
+         Mobile:
+         Vertical MP4
 
-         MOBILE:
-         anna-and-mitch-background-mobile-1080x1920.mp4
-
-         If mobile autoplay is rejected, the WebP fallback
-         is loaded automatically.
+         Low Power Mode:
+         Animated WebP fallback
          ===================================================== -->
 
     <video
@@ -849,9 +847,6 @@ and (max-width: 700px) {
 
     <!-- =====================================================
          MOBILE WEBP FALLBACK
-
-         This stays unloaded unless the mobile MP4
-         cannot autoplay.
          ===================================================== -->
 
     <img
@@ -963,7 +958,11 @@ and (max-width: 700px) {
             id="vimeo-player"
             src=""
             title="Anna and Mitch Save the Date"
+
             allow="autoplay; fullscreen; picture-in-picture"
+
+            webkitallowfullscreen
+            mozallowfullscreen
             allowfullscreen
         ></iframe>
 
@@ -1035,10 +1034,13 @@ const mobileWebP =
 
 /* =========================================================
    VIMEO URL
+
+   fullscreen=1 explicitly enables Vimeo's fullscreen
+   control.
    ========================================================= */
 
 const vimeoURL =
-    "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
+    "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&fullscreen=1&dnt=1";
 
 
 /* =========================================================
@@ -1052,7 +1054,7 @@ const isMobile =
 
 
 /* =========================================================
-   SELECT THE CORRECT MP4
+   SELECT CORRECT BACKGROUND VIDEO
    ========================================================= */
 
 if (isMobile) {
@@ -1074,18 +1076,10 @@ if (isMobile) {
 
 function switchToMobileFallback() {
 
-    /*
-       Only use this on mobile.
-    */
-
     if (!isMobile) {
         return;
     }
 
-
-    /*
-       Prevent running twice.
-    */
 
     if (
         mobileBackground.style.display ===
@@ -1096,7 +1090,7 @@ function switchToMobileFallback() {
 
 
     /*
-       Load the WebP only when needed.
+       Only load the WebP when needed.
     */
 
     mobileBackground.src =
@@ -1104,7 +1098,7 @@ function switchToMobileFallback() {
 
 
     /*
-       Hide the mobile MP4.
+       Hide the MP4.
     */
 
     backgroundVideo.style.display =
@@ -1112,7 +1106,7 @@ function switchToMobileFallback() {
 
 
     /*
-       Show the animated WebP.
+       Show the WebP.
     */
 
     mobileBackground.style.display =
@@ -1122,7 +1116,7 @@ function switchToMobileFallback() {
 
 
 /* =========================================================
-   TRY TO PLAY THE SELECTED VIDEO
+   TRY TO PLAY BACKGROUND VIDEO
    ========================================================= */
 
 function tryBackgroundVideo() {
@@ -1130,10 +1124,6 @@ function tryBackgroundVideo() {
     const playPromise =
         backgroundVideo.play();
 
-
-    /*
-       Safari returns a Promise from play().
-    */
 
     if (
         playPromise !== undefined
@@ -1143,11 +1133,10 @@ function tryBackgroundVideo() {
             function() {
 
                 /*
-                   On mobile, this normally means
-                   autoplay was blocked — including
-                   Low Power Mode.
+                   Autoplay was rejected.
 
-                   Switch to WebP.
+                   On mobile this is where we
+                   switch to the WebP.
                 */
 
                 switchToMobileFallback();
@@ -1195,7 +1184,7 @@ watchVideo.addEventListener(
 
 
         /*
-           Stop the MP4 if it is playing.
+           Pause the background MP4.
         */
 
         if (
@@ -1209,7 +1198,7 @@ watchVideo.addEventListener(
 
 
         /*
-           Hide the WebP while Vimeo is open.
+           Hide WebP fallback while Vimeo is open.
         */
 
         if (
@@ -1263,14 +1252,14 @@ function closeVideoModal() {
 
 
     /*
-       Stop Vimeo.
+       Stop Vimeo completely.
     */
 
     vimeoPlayer.src = "";
 
 
     /*
-       If WebP is being used, show it again.
+       If WebP is active, show it again.
     */
 
     if (
@@ -1287,18 +1276,13 @@ function closeVideoModal() {
 
 
     /*
-       Otherwise resume the appropriate MP4.
+       Otherwise resume the background MP4.
     */
 
     backgroundVideo
         .play()
         .catch(
             function() {
-
-                /*
-                   If mobile autoplay is no longer
-                   allowed, use WebP.
-                */
 
                 switchToMobileFallback();
 
