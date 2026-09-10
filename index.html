@@ -62,7 +62,7 @@ body {
 
 
 /* =========================================================
-   DESKTOP BACKGROUND VIDEO
+   BACKGROUND VIDEO
    ========================================================= */
 
 .hero-video {
@@ -86,7 +86,7 @@ body {
 
 
 /* =========================================================
-   MOBILE ANIMATED WEBP
+   MOBILE WEBP FALLBACK
    ========================================================= */
 
 .mobile-background {
@@ -106,13 +106,13 @@ body {
 
     animation:
         mobileFadeIn
-        2.5s ease
+        1.5s ease
         forwards;
 }
 
 
 /* =========================================================
-   CINEMATIC DARK OVERLAY
+   CINEMATIC OVERLAY
    ========================================================= */
 
 .overlay {
@@ -676,52 +676,8 @@ body {
 
 @media (max-width: 700px) {
 
-
-    /*
-       Hide the normal video on mobile.
-
-       Mobile uses the animated WebP instead.
-    */
-
-    .hero-video {
-        display: none;
-    }
-
-
-    /*
-       Display the animated WebP.
-
-       Because this is an image rather than a video,
-       iOS Low Power Mode does not get to block
-       video autoplay.
-    */
-
-    .mobile-background {
-        display: block;
-
-        width: 100%;
-        height: 100%;
-
-        object-fit: cover;
-
-        object-position: center center;
-    }
-
-
-    .overlay {
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(0,0,0,.15) 0%,
-                rgba(0,0,0,.08) 45%,
-                rgba(0,0,0,.25) 100%
-            );
-    }
-
-
     .content {
         top: 47%;
-
         width: 92%;
     }
 
@@ -832,7 +788,6 @@ body {
 @media (max-height: 700px)
 and (max-width: 700px) {
 
-
     .content {
         top: 46%;
     }
@@ -868,7 +823,14 @@ and (max-width: 700px) {
 
 
     <!-- =====================================================
-         DESKTOP BACKGROUND
+         BACKGROUND VIDEO
+
+         This is ALWAYS the preferred background.
+
+         If Safari allows autoplay, this plays.
+
+         If Safari rejects autoplay, JavaScript switches
+         to the animated WebP below.
          ===================================================== -->
 
     <video
@@ -877,6 +839,7 @@ and (max-width: 700px) {
         muted
         loop
         playsinline
+        webkit-playsinline
         preload="auto"
     >
 
@@ -889,15 +852,16 @@ and (max-width: 700px) {
 
 
     <!-- =====================================================
-         MOBILE BACKGROUND
+         MOBILE WEBP FALLBACK
 
-         Animated WebP instead of video so iOS Low Power
-         Mode cannot block the animation.
+         The source is intentionally stored in data-src
+         so the WebP is NOT downloaded unless the MP4
+         autoplay fails.
          ===================================================== -->
 
     <img
         class="mobile-background"
-        src="anna-and-mitch-background-mobile-480x854.webp"
+        data-src="anna-and-mitch-background-mobile-480x854.webp"
         alt=""
     >
 
@@ -1022,6 +986,18 @@ and (max-width: 700px) {
    ELEMENTS
    ========================================================= */
 
+const backgroundVideo =
+    document.querySelector(
+        ".hero-video"
+    );
+
+
+const mobileBackground =
+    document.querySelector(
+        ".mobile-background"
+    );
+
+
 const watchVideo =
     document.getElementById(
         "watch-video"
@@ -1046,18 +1022,128 @@ const vimeoPlayer =
     );
 
 
-const backgroundVideo =
-    document.querySelector(
-        ".hero-video"
-    );
-
-
 /* =========================================================
    VIMEO URL
    ========================================================= */
 
 const vimeoURL =
     "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
+
+
+/* =========================================================
+   MOBILE FALLBACK
+   ========================================================= */
+
+function switchToMobileFallback() {
+
+    /*
+       Don't do anything if the fallback
+       is already active.
+    */
+
+    if (
+        mobileBackground.style.display === "block"
+    ) {
+        return;
+    }
+
+
+    /*
+       Load the WebP only now.
+
+       This means users whose MP4 works
+       never have to download the WebP.
+    */
+
+    const fallbackSource =
+        mobileBackground.dataset.src;
+
+
+    mobileBackground.src =
+        fallbackSource;
+
+
+    /*
+       Hide the failed video.
+    */
+
+    backgroundVideo.style.display =
+        "none";
+
+
+    /*
+       Show the animated WebP.
+    */
+
+    mobileBackground.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   TRY TO PLAY THE NORMAL VIDEO
+   ========================================================= */
+
+function tryBackgroundVideo() {
+
+    /*
+       Ask Safari to actually start playback.
+
+       In normal conditions this Promise resolves.
+
+       In iOS Low Power Mode, Safari can reject
+       the request because autoplay is disabled.
+    */
+
+    const playPromise =
+        backgroundVideo.play();
+
+
+    if (
+        playPromise !== undefined
+    ) {
+
+        playPromise.catch(
+            function() {
+
+                /*
+                   Autoplay failed.
+
+                   Use the animated WebP instead.
+                */
+
+                switchToMobileFallback();
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   START BACKGROUND
+   ========================================================= */
+
+if (
+    backgroundVideo.readyState >= 2
+) {
+
+    tryBackgroundVideo();
+
+} else {
+
+    backgroundVideo.addEventListener(
+        "canplay",
+        tryBackgroundVideo,
+        {
+            once: true
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -1072,11 +1158,12 @@ watchVideo.addEventListener(
 
 
         /*
-           Desktop background is a real video,
-           so pause it when Vimeo opens.
+           Pause the MP4 if it's playing.
         */
 
-        if (backgroundVideo) {
+        if (
+            backgroundVideo.style.display !== "none"
+        ) {
 
             backgroundVideo.pause();
 
@@ -1084,7 +1171,22 @@ watchVideo.addEventListener(
 
 
         /*
-           Load Vimeo only when requested.
+           The WebP fallback cannot be paused
+           like a video, so temporarily hide it.
+        */
+
+        if (
+            mobileBackground.style.display === "block"
+        ) {
+
+            mobileBackground.style.visibility =
+                "hidden";
+
+        }
+
+
+        /*
+           Load Vimeo.
         */
 
         vimeoPlayer.src =
@@ -1124,32 +1226,48 @@ function closeVideoModal() {
 
 
     /*
-       Clearing the Vimeo iframe stops
-       the video completely.
+       Stop Vimeo completely.
     */
 
     vimeoPlayer.src = "";
 
 
     /*
-       Resume desktop background video.
-
-       Mobile WebP continues automatically.
+       If the WebP fallback is active,
+       show it again.
     */
 
-    if (backgroundVideo) {
+    if (
+        mobileBackground.style.display === "block"
+    ) {
 
-        backgroundVideo
-            .play()
-            .catch(
-                function() {
-                    /*
-                       Ignore autoplay restrictions.
-                    */
-                }
-            );
+        mobileBackground.style.visibility =
+            "visible";
+
+        return;
 
     }
+
+
+    /*
+       Otherwise resume the normal
+       background MP4.
+    */
+
+    backgroundVideo
+        .play()
+        .catch(
+            function() {
+
+                /*
+                   If playback somehow becomes
+                   unavailable, use the fallback.
+                */
+
+                switchToMobileFallback();
+
+            }
+        );
 
 }
 
