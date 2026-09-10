@@ -35,39 +35,60 @@ body {
     background: #000;
 }
 
+
 /* =========================================================
-   BACKGROUND VIDEO
+   BACKGROUND VIDEO — DESKTOP
    ========================================================= */
 
-.hero-video,
-.mobile-background {
+.hero-video {
     position: absolute;
     inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    opacity: 0;
+
+    animation: videoFadeIn 2.5s ease forwards;
+}
+
+
+/* =========================================================
+   MOBILE SAFARI BACKGROUND
+   ========================================================= */
+
+.mobile-background {
+    display: none;
+
+    position: absolute;
+    inset: 0;
+
     width: 100%;
     height: 100%;
 }
 
-.hero-video {
+.mobile-background img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
     object-fit: cover;
     object-position: center center;
-    opacity: 0;
-    animation: videoFadeIn 2.5s ease forwards;
 }
 
-/* Mobile Safari MP4-as-image workaround */
-.mobile-background {
-    display: none;
-    object-fit: cover;
-    object-position: center center;
-}
 
 /* =========================================================
-   OVERLAY
+   DARK CINEMATIC OVERLAY
    ========================================================= */
 
 .overlay {
     position: absolute;
     inset: 0;
+
     background:
         linear-gradient(
             to bottom,
@@ -75,9 +96,12 @@ body {
             rgba(0,0,0,.07) 45%,
             rgba(0,0,0,.20) 100%
         );
+
     z-index: 1;
+
     pointer-events: none;
 }
+
 
 /* =========================================================
    MAIN CONTENT
@@ -85,12 +109,18 @@ body {
 
 .content {
     position: absolute;
+
     z-index: 2;
+
     left: 50%;
     top: 48%;
+
     transform: translate(-50%, -50%);
+
     width: 90%;
+
     text-align: center;
+
     color: white;
 
     display: flex;
@@ -98,35 +128,59 @@ body {
     align-items: center;
 
     opacity: 0;
-    animation: contentFadeIn 1.8s ease 1.2s forwards;
+
+    animation:
+        contentFadeIn
+        1.8s ease
+        1.2s forwards;
 }
+
 
 .names {
     font-family: "aunt-mildred-mvb", sans-serif;
+
     font-weight: 400;
     font-style: normal;
 
-    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    font-size:
+        clamp(
+            3.5rem,
+            6vw,
+            6.5rem
+        );
+
     line-height: 1;
+
     letter-spacing: .01em;
 
-    text-shadow: 0 2px 16px rgba(0,0,0,.22);
+    text-shadow:
+        0 2px 16px rgba(0,0,0,.22);
 
     margin-bottom: 20px;
 }
 
+
 .date {
     font-family: "legitima", serif;
+
     font-weight: 500;
     font-style: normal;
 
-    font-size: clamp(1rem, 1.35vw, 1.35rem);
+    font-size:
+        clamp(
+            1rem,
+            1.35vw,
+            1.35rem
+        );
+
     letter-spacing: .18em;
 
-    text-shadow: 0 2px 12px rgba(0,0,0,.22);
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.22);
 
     margin-bottom: 38px;
 }
+
 
 /* =========================================================
    BUTTONS
@@ -134,46 +188,61 @@ body {
 
 .buttons {
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
     align-items: center;
 
     gap: 13px;
+
     width: 100%;
 }
+
 
 .button {
     position: relative;
 
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
     width: 330px;
+
     padding: 13px 22px;
 
     color: white;
+
     text-decoration: none;
 
     font-family: "legitima", serif;
+
     font-weight: 500;
     font-style: normal;
 
     font-size: .82rem;
+
     letter-spacing: .16em;
+
     text-transform: uppercase;
 
     text-align: center;
+
     white-space: nowrap;
 
-    border: 1px solid rgba(255,255,255,.65);
+    border:
+        1px solid
+        rgba(255,255,255,.65);
 
-    background: rgba(0,0,0,.08);
+    background:
+        rgba(0,0,0,.08);
 
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
 
-    text-shadow: 0 2px 10px rgba(0,0,0,.20);
+    text-shadow:
+        0 2px 10px rgba(0,0,0,.20);
 
     transition:
         background .4s ease,
@@ -181,10 +250,12 @@ body {
         transform .4s ease;
 }
 
+
 .button::after {
     content: "";
 
     position: absolute;
+
     left: 50%;
     bottom: -1px;
 
@@ -193,20 +264,30 @@ body {
 
     background: white;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    transition: width .4s ease;
+    transition:
+        width .4s ease;
 }
+
 
 .button:hover {
-    background: rgba(255,255,255,.13);
-    border-color: rgba(255,255,255,.95);
-    transform: translateY(-2px);
+    background:
+        rgba(255,255,255,.13);
+
+    border-color:
+        rgba(255,255,255,.95);
+
+    transform:
+        translateY(-2px);
 }
+
 
 .button:hover::after {
     width: 70%;
 }
+
 
 /* =========================================================
    LOCATION
@@ -214,51 +295,85 @@ body {
 
 .location {
     position: absolute;
+
     z-index: 2;
 
     left: 50%;
+
     bottom: 7%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     width: 90%;
 
     text-align: center;
+
     color: white;
 
     opacity: 0;
 
-    animation: locationFadeIn 1.8s ease 1.6s forwards;
+    animation:
+        locationFadeIn
+        1.8s ease
+        1.6s forwards;
 }
 
+
 .location-name {
-    font-family: "aunt-mildred-mvb", sans-serif;
+    font-family:
+        "aunt-mildred-mvb",
+        sans-serif;
+
     font-weight: 400;
+
     font-style: italic;
 
-    font-size: clamp(2rem, 3.2vw, 3.5rem);
+    font-size:
+        clamp(
+            2rem,
+            3.2vw,
+            3.5rem
+        );
 
     line-height: 1;
+
     letter-spacing: .08em;
 
     font-variant-caps: small-caps;
-    font-feature-settings: "smcp" 1;
 
-    text-shadow: 0 2px 14px rgba(0,0,0,.20);
+    font-feature-settings:
+        "smcp" 1;
+
+    text-shadow:
+        0 2px 14px rgba(0,0,0,.20);
 
     margin-bottom: 8px;
 }
 
+
 .location-state {
-    font-family: "legitima", serif;
+    font-family:
+        "legitima",
+        serif;
+
     font-weight: 500;
+
     font-style: normal;
 
-    font-size: clamp(.75rem, 1vw, 1rem);
+    font-size:
+        clamp(
+            .75rem,
+            1vw,
+            1rem
+        );
+
     letter-spacing: .18em;
 
-    text-shadow: 0 2px 12px rgba(0,0,0,.20);
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.20);
 }
+
 
 /* =========================================================
    VIMEO VIDEO MODAL
@@ -266,20 +381,25 @@ body {
 
 .video-modal {
     position: fixed;
+
     inset: 0;
 
     z-index: 10;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     padding: 40px;
 
-    background: rgba(0,0,0,.92);
+    background:
+        rgba(0,0,0,.92);
 
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 
     transition:
@@ -287,30 +407,44 @@ body {
         visibility .5s ease;
 }
 
+
 .video-modal.active {
     opacity: 1;
+
     visibility: visible;
+
     pointer-events: auto;
 }
+
 
 .video-container {
     position: relative;
 
-    width: min(1200px, 90vw);
+    width:
+        min(
+            1200px,
+            90vw
+        );
 
     aspect-ratio: 16 / 9;
 
     background: #000;
 
-    box-shadow: 0 20px 80px rgba(0,0,0,.55);
+    box-shadow:
+        0 20px 80px
+        rgba(0,0,0,.55);
 
-    transform: scale(.96);
+    transform:
+        scale(.96);
 
-    transition: transform .6s ease;
+    transition:
+        transform .6s ease;
 }
+
 
 .video-container iframe {
     position: absolute;
+
     inset: 0;
 
     width: 100%;
@@ -318,6 +452,7 @@ body {
 
     border: 0;
 }
+
 
 .close-video {
     position: fixed;
@@ -331,19 +466,27 @@ body {
     height: 42px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(255,255,255,.55);
+    border:
+        1px solid
+        rgba(255,255,255,.55);
+
     border-radius: 50%;
 
-    background: rgba(0,0,0,.15);
+    background:
+        rgba(0,0,0,.15);
 
     color: white;
 
     font-family: Arial, sans-serif;
+
     font-size: 25px;
+
     font-weight: 200;
+
     line-height: 1;
 
     cursor: pointer;
@@ -354,21 +497,32 @@ body {
         transform .3s ease;
 }
 
+
 .close-video:hover {
-    background: rgba(255,255,255,.15);
-    border-color: rgba(255,255,255,.9);
-    transform: rotate(90deg);
+    background:
+        rgba(255,255,255,.15);
+
+    border-color:
+        rgba(255,255,255,.9);
+
+    transform:
+        rotate(90deg);
 }
 
-.video-modal.active .video-container {
-    transform: scale(1);
+
+.video-modal.active
+.video-container {
+    transform:
+        scale(1);
 }
+
 
 /* =========================================================
    ANIMATIONS
    ========================================================= */
 
 @keyframes videoFadeIn {
+
     from {
         opacity: 0;
     }
@@ -376,31 +530,59 @@ body {
     to {
         opacity: 1;
     }
+
 }
+
 
 @keyframes contentFadeIn {
+
     from {
         opacity: 0;
-        transform: translate(-50%, calc(-50% + 15px));
+
+        transform:
+            translate(
+                -50%,
+                calc(-50% + 15px)
+            );
     }
 
     to {
         opacity: 1;
-        transform: translate(-50%, -50%);
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
     }
+
 }
+
 
 @keyframes locationFadeIn {
+
     from {
         opacity: 0;
-        transform: translate(-50%, 10px);
+
+        transform:
+            translate(
+                -50%,
+                10px
+            );
     }
 
     to {
         opacity: 1;
-        transform: translate(-50%, 0);
+
+        transform:
+            translate(
+                -50%,
+                0
+            );
     }
+
 }
+
 
 /* =========================================================
    MOBILE
@@ -409,26 +591,31 @@ body {
 @media (max-width: 700px) {
 
     /*
-       IMPORTANT:
-       On mobile we hide the normal <video> and instead use
-       Safari's MP4-as-picture behavior.
+       Mobile uses the MP4 through an <img> inside
+       <picture> rather than a <video> element.
 
-       This avoids iOS Low Power Mode's autoplay restriction.
+       This is specifically intended to work around
+       iOS Safari autoplay restrictions in Low Power Mode.
     */
 
     .hero-video {
         display: none;
     }
 
+
     .mobile-background {
         display: block;
+    }
 
+
+    .mobile-background img {
         width: 100%;
         height: 100%;
 
         object-fit: cover;
         object-position: center center;
     }
+
 
     .overlay {
         background:
@@ -440,61 +627,95 @@ body {
             );
     }
 
+
     .content {
         top: 47%;
         width: 92%;
     }
 
+
     .names {
-        font-size: clamp(3.1rem, 13vw, 4.5rem);
+        font-size:
+            clamp(
+                3.1rem,
+                13vw,
+                4.5rem
+            );
+
         margin-bottom: 16px;
 
-        text-shadow: 0 2px 14px rgba(0,0,0,.22);
+        text-shadow:
+            0 2px 14px rgba(0,0,0,.22);
     }
+
 
     .date {
         font-size: .9rem;
+
         letter-spacing: .14em;
+
         margin-bottom: 32px;
     }
+
 
     .buttons {
         gap: 12px;
     }
 
-    .button {
-        width: min(330px, 90vw);
 
-        padding: 13px 18px;
+    .button {
+        width:
+            min(
+                330px,
+                90vw
+            );
+
+        padding:
+            13px 18px;
 
         font-size: .78rem;
 
         white-space: nowrap;
     }
 
+
     .location {
         bottom: 5%;
     }
 
+
     .location-name {
-        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        font-size:
+            clamp(
+                1.8rem,
+                8vw,
+                2.5rem
+            );
+
         letter-spacing: .06em;
+
         margin-bottom: 6px;
     }
 
+
     .location-state {
         font-size: .7rem;
+
         letter-spacing: .16em;
     }
+
 
     .video-modal {
         padding: 20px;
     }
 
+
     .video-container {
         width: 94vw;
+
         aspect-ratio: 16 / 9;
     }
+
 
     .close-video {
         top: 18px;
@@ -505,7 +726,9 @@ body {
 
         font-size: 22px;
     }
+
 }
+
 
 /* =========================================================
    SHORT MOBILE SCREENS
@@ -517,28 +740,39 @@ body {
         top: 46%;
     }
 
+
     .names {
         font-size: 3rem;
+
         margin-bottom: 12px;
     }
+
 
     .date {
         margin-bottom: 24px;
     }
 
+
     .location {
         bottom: 4%;
     }
+
 }
 
 </style>
 </head>
 
+
 <body>
+
 
 <main class="hero">
 
-    <!-- DESKTOP BACKGROUND -->
+
+    <!-- =====================================================
+         DESKTOP BACKGROUND VIDEO
+         ===================================================== -->
+
     <video
         class="hero-video"
         autoplay
@@ -547,14 +781,22 @@ body {
         playsinline
         preload="auto"
     >
+
         <source
             src="anna-and-mitch-background-1080p-web.mp4"
             type="video/mp4"
         >
+
     </video>
 
 
-    <!-- MOBILE SAFARI BACKGROUND -->
+    <!-- =====================================================
+         MOBILE SAFARI BACKGROUND
+
+         The MP4 is intentionally being supplied through
+         an <img> inside <picture> rather than <video>.
+         ===================================================== -->
+
     <picture class="mobile-background">
 
         <source
@@ -562,25 +804,40 @@ body {
             type="video/mp4"
         >
 
+        <img
+            src="anna-and-mitch-background-mobile-1080x1920.mp4"
+            alt=""
+        >
+
     </picture>
 
 
-    <!-- DARK CINEMATIC OVERLAY -->
+    <!-- =====================================================
+         CINEMATIC OVERLAY
+         ===================================================== -->
+
     <div class="overlay"></div>
 
 
-    <!-- MAIN CONTENT -->
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
     <section class="content">
+
 
         <h1 class="names">
             Anna and Mitch
         </h1>
 
+
         <div class="date">
             September 26, 2027
         </div>
 
+
         <div class="buttons">
+
 
             <a
                 href="#"
@@ -589,6 +846,7 @@ body {
             >
                 Watch Our Save the Date Video
             </a>
+
 
             <a
                 href="https://www.zola.com/wedding/annaandmitch926"
@@ -599,34 +857,46 @@ body {
                 Enter Website
             </a>
 
+
         </div>
+
 
     </section>
 
 
-    <!-- LOCATION -->
+    <!-- =====================================================
+         LOCATION
+         ===================================================== -->
+
     <section class="location">
+
 
         <div class="location-name">
             Estes Park
         </div>
 
+
         <div class="location-state">
             COLORADO
         </div>
 
+
     </section>
+
 
 </main>
 
 
-<!-- VIMEO MODAL -->
+<!-- =========================================================
+     VIMEO VIDEO MODAL
+     ========================================================= -->
 
 <div
     class="video-modal"
     id="video-modal"
     aria-hidden="true"
 >
+
 
     <button
         class="close-video"
@@ -636,7 +906,9 @@ body {
         ×
     </button>
 
+
     <div class="video-container">
+
 
         <iframe
             id="vimeo-player"
@@ -646,105 +918,153 @@ body {
             allowfullscreen
         ></iframe>
 
+
     </div>
+
 
 </div>
 
 
 <script>
 
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
 const watchVideo =
-    document.getElementById("watch-video");
+    document.getElementById(
+        "watch-video"
+    );
 
 const videoModal =
-    document.getElementById("video-modal");
+    document.getElementById(
+        "video-modal"
+    );
 
 const closeVideo =
-    document.getElementById("close-video");
+    document.getElementById(
+        "close-video"
+    );
 
 const vimeoPlayer =
-    document.getElementById("vimeo-player");
+    document.getElementById(
+        "vimeo-player"
+    );
 
 const backgroundVideo =
-    document.querySelector(".hero-video");
+    document.querySelector(
+        ".hero-video"
+    );
 
+
+/* =========================================================
+   VIMEO URL
+   ========================================================= */
 
 const vimeoURL =
     "https://player.vimeo.com/video/1225371197?h=0adab949d5&autoplay=1&title=0&byline=0&portrait=0&dnt=1";
 
 
 /* =========================================================
-   OPEN VIMEO
+   OPEN SAVE THE DATE VIDEO
    ========================================================= */
 
-watchVideo.addEventListener("click", function(event) {
+watchVideo.addEventListener(
+    "click",
+    function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    /*
-       Desktop:
-       Pause the actual background video.
 
-       Mobile:
-       The background is an <picture>, so there is
-       nothing to pause.
-    */
+        /*
+           Desktop background is a real video,
+           so pause it when Vimeo opens.
+        */
 
-    if (backgroundVideo) {
-        backgroundVideo.pause();
+        if (backgroundVideo) {
+
+            backgroundVideo.pause();
+
+        }
+
+
+        /*
+           Load Vimeo only when requested.
+        */
+
+        vimeoPlayer.src =
+            vimeoURL;
+
+
+        videoModal.classList.add(
+            "active"
+        );
+
+
+        videoModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
     }
-
-    vimeoPlayer.src = vimeoURL;
-
-    videoModal.classList.add("active");
-
-    videoModal.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-});
+);
 
 
 /* =========================================================
-   CLOSE VIMEO
+   CLOSE SAVE THE DATE VIDEO
    ========================================================= */
 
 function closeVideoModal() {
 
-    videoModal.classList.remove("active");
+
+    videoModal.classList.remove(
+        "active"
+    );
+
 
     videoModal.setAttribute(
         "aria-hidden",
         "true"
     );
 
+
     /*
-       Clearing the iframe source stops Vimeo completely.
+       Clearing the Vimeo iframe stops
+       the video completely.
     */
 
     vimeoPlayer.src = "";
 
+
     /*
-       Resume desktop background video.
-       Mobile Safari's picture background continues
-       independently.
+       Resume the desktop background.
+
+       On mobile the background is handled
+       separately through the picture/image
+       implementation.
     */
 
     if (backgroundVideo) {
 
         backgroundVideo
             .play()
-            .catch(function() {
-                /* Ignore autoplay restrictions */
-            });
+            .catch(
+                function() {
+                    /*
+                       Ignore autoplay restrictions.
+                    */
+                }
+            );
 
     }
 
 }
 
 
-/* Close button */
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
 
 closeVideo.addEventListener(
     "click",
@@ -752,21 +1072,29 @@ closeVideo.addEventListener(
 );
 
 
-/* Click outside video */
+/* =========================================================
+   CLICK OUTSIDE VIDEO TO CLOSE
+   ========================================================= */
 
 videoModal.addEventListener(
     "click",
     function(event) {
 
-        if (event.target === videoModal) {
+        if (
+            event.target === videoModal
+        ) {
+
             closeVideoModal();
+
         }
 
     }
 );
 
 
-/* Escape key */
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
 
 document.addEventListener(
     "keydown",
@@ -774,15 +1102,21 @@ document.addEventListener(
 
         if (
             event.key === "Escape" &&
-            videoModal.classList.contains("active")
+            videoModal.classList.contains(
+                "active"
+            )
         ) {
+
             closeVideoModal();
+
         }
 
     }
 );
 
+
 </script>
+
 
 </body>
 </html>
