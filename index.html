@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Anna and Mitch</title>
 
-<link rel="stylesheet" href="https://use.typekit.net/anp5gec.css">
+<link
+    rel="stylesheet"
+    href="https://use.typekit.net/anp5gec.css"
+>
+
 
 <style>
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 
 html,
 body {
@@ -22,26 +38,36 @@ body {
     overflow: hidden;
 }
 
-body {
-    background: #000;
-}
 
-.hero {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    height: 100svh;
-    overflow: hidden;
+body {
     background: #000;
 }
 
 
 /* =========================================================
-   BACKGROUND VIDEO — DESKTOP
+   HERO
+   ========================================================= */
+
+.hero {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+/* =========================================================
+   DESKTOP BACKGROUND VIDEO
    ========================================================= */
 
 .hero-video {
     position: absolute;
+
     inset: 0;
 
     width: 100%;
@@ -52,41 +78,46 @@ body {
 
     opacity: 0;
 
-    animation: videoFadeIn 2.5s ease forwards;
+    animation:
+        videoFadeIn
+        2.5s ease
+        forwards;
 }
 
 
 /* =========================================================
-   MOBILE SAFARI BACKGROUND
+   MOBILE ANIMATED WEBP
    ========================================================= */
 
 .mobile-background {
     display: none;
 
     position: absolute;
+
     inset: 0;
-
-    width: 100%;
-    height: 100%;
-}
-
-.mobile-background img {
-    display: block;
 
     width: 100%;
     height: 100%;
 
     object-fit: cover;
     object-position: center center;
+
+    opacity: 0;
+
+    animation:
+        mobileFadeIn
+        2.5s ease
+        forwards;
 }
 
 
 /* =========================================================
-   DARK CINEMATIC OVERLAY
+   CINEMATIC DARK OVERLAY
    ========================================================= */
 
 .overlay {
     position: absolute;
+
     inset: 0;
 
     background:
@@ -115,7 +146,11 @@ body {
     left: 50%;
     top: 48%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
 
     width: 90%;
 
@@ -124,7 +159,9 @@ body {
     color: white;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
     opacity: 0;
@@ -136,10 +173,17 @@ body {
 }
 
 
+/* =========================================================
+   NAMES
+   ========================================================= */
+
 .names {
-    font-family: "aunt-mildred-mvb", sans-serif;
+    font-family:
+        "aunt-mildred-mvb",
+        sans-serif;
 
     font-weight: 400;
+
     font-style: normal;
 
     font-size:
@@ -154,16 +198,24 @@ body {
     letter-spacing: .01em;
 
     text-shadow:
-        0 2px 16px rgba(0,0,0,.22);
+        0 2px 16px
+        rgba(0,0,0,.22);
 
     margin-bottom: 20px;
 }
 
 
+/* =========================================================
+   DATE
+   ========================================================= */
+
 .date {
-    font-family: "legitima", serif;
+    font-family:
+        "legitima",
+        serif;
 
     font-weight: 500;
+
     font-style: normal;
 
     font-size:
@@ -176,7 +228,8 @@ body {
     letter-spacing: .18em;
 
     text-shadow:
-        0 2px 12px rgba(0,0,0,.22);
+        0 2px 12px
+        rgba(0,0,0,.22);
 
     margin-bottom: 38px;
 }
@@ -192,6 +245,7 @@ body {
     flex-direction: column;
 
     justify-content: center;
+
     align-items: center;
 
     gap: 13px;
@@ -206,6 +260,7 @@ body {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     width: 330px;
@@ -216,9 +271,12 @@ body {
 
     text-decoration: none;
 
-    font-family: "legitima", serif;
+    font-family:
+        "legitima",
+        serif;
 
     font-weight: 500;
+
     font-style: normal;
 
     font-size: .82rem;
@@ -238,11 +296,15 @@ body {
     background:
         rgba(0,0,0,.08);
 
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter:
+        blur(2px);
+
+    -webkit-backdrop-filter:
+        blur(2px);
 
     text-shadow:
-        0 2px 10px rgba(0,0,0,.20);
+        0 2px 10px
+        rgba(0,0,0,.20);
 
     transition:
         background .4s ease,
@@ -257,9 +319,11 @@ body {
     position: absolute;
 
     left: 50%;
+
     bottom: -1px;
 
     width: 0;
+
     height: 1px;
 
     background: white;
@@ -340,13 +404,15 @@ body {
 
     letter-spacing: .08em;
 
-    font-variant-caps: small-caps;
+    font-variant-caps:
+        small-caps;
 
     font-feature-settings:
         "smcp" 1;
 
     text-shadow:
-        0 2px 14px rgba(0,0,0,.20);
+        0 2px 14px
+        rgba(0,0,0,.20);
 
     margin-bottom: 8px;
 }
@@ -371,12 +437,13 @@ body {
     letter-spacing: .18em;
 
     text-shadow:
-        0 2px 12px rgba(0,0,0,.20);
+        0 2px 12px
+        rgba(0,0,0,.20);
 }
 
 
 /* =========================================================
-   VIMEO VIDEO MODAL
+   VIMEO MODAL
    ========================================================= */
 
 .video-modal {
@@ -389,6 +456,7 @@ body {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 40px;
@@ -458,16 +526,19 @@ body {
     position: fixed;
 
     top: 28px;
+
     right: 32px;
 
     z-index: 11;
 
     width: 42px;
+
     height: 42px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     border:
@@ -481,7 +552,9 @@ body {
 
     color: white;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
 
     font-size: 25px;
 
@@ -522,6 +595,19 @@ body {
    ========================================================= */
 
 @keyframes videoFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes mobileFadeIn {
 
     from {
         opacity: 0;
@@ -590,12 +676,11 @@ body {
 
 @media (max-width: 700px) {
 
-    /*
-       Mobile uses the MP4 through an <img> inside
-       <picture> rather than a <video> element.
 
-       This is specifically intended to work around
-       iOS Safari autoplay restrictions in Low Power Mode.
+    /*
+       Hide the normal video on mobile.
+
+       Mobile uses the animated WebP instead.
     */
 
     .hero-video {
@@ -603,16 +688,22 @@ body {
     }
 
 
+    /*
+       Display the animated WebP.
+
+       Because this is an image rather than a video,
+       iOS Low Power Mode does not get to block
+       video autoplay.
+    */
+
     .mobile-background {
         display: block;
-    }
 
-
-    .mobile-background img {
         width: 100%;
         height: 100%;
 
         object-fit: cover;
+
         object-position: center center;
     }
 
@@ -630,6 +721,7 @@ body {
 
     .content {
         top: 47%;
+
         width: 92%;
     }
 
@@ -645,7 +737,8 @@ body {
         margin-bottom: 16px;
 
         text-shadow:
-            0 2px 14px rgba(0,0,0,.22);
+            0 2px 14px
+            rgba(0,0,0,.22);
     }
 
 
@@ -719,9 +812,11 @@ body {
 
     .close-video {
         top: 18px;
+
         right: 18px;
 
         width: 38px;
+
         height: 38px;
 
         font-size: 22px;
@@ -734,7 +829,9 @@ body {
    SHORT MOBILE SCREENS
    ========================================================= */
 
-@media (max-height: 700px) and (max-width: 700px) {
+@media (max-height: 700px)
+and (max-width: 700px) {
+
 
     .content {
         top: 46%;
@@ -760,6 +857,7 @@ body {
 }
 
 </style>
+
 </head>
 
 
@@ -770,7 +868,7 @@ body {
 
 
     <!-- =====================================================
-         DESKTOP BACKGROUND VIDEO
+         DESKTOP BACKGROUND
          ===================================================== -->
 
     <video
@@ -791,25 +889,17 @@ body {
 
 
     <!-- =====================================================
-         MOBILE SAFARI BACKGROUND
+         MOBILE BACKGROUND
 
-         The MP4 is intentionally being supplied through
-         an <img> inside <picture> rather than <video>.
+         Animated WebP instead of video so iOS Low Power
+         Mode cannot block the animation.
          ===================================================== -->
 
-    <picture class="mobile-background">
-
-        <source
-            srcset="anna-and-mitch-background-mobile-1080x1920.mp4"
-            type="video/mp4"
-        >
-
-        <img
-            src="anna-and-mitch-background-mobile-1080x1920.mp4"
-            alt=""
-        >
-
-    </picture>
+    <img
+        class="mobile-background"
+        src="anna-and-mitch-background-mobile-480x854.webp"
+        alt=""
+    >
 
 
     <!-- =====================================================
@@ -937,20 +1027,24 @@ const watchVideo =
         "watch-video"
     );
 
+
 const videoModal =
     document.getElementById(
         "video-modal"
     );
+
 
 const closeVideo =
     document.getElementById(
         "close-video"
     );
 
+
 const vimeoPlayer =
     document.getElementById(
         "vimeo-player"
     );
+
 
 const backgroundVideo =
     document.querySelector(
@@ -967,7 +1061,7 @@ const vimeoURL =
 
 
 /* =========================================================
-   OPEN SAVE THE DATE VIDEO
+   OPEN VIMEO
    ========================================================= */
 
 watchVideo.addEventListener(
@@ -1012,7 +1106,7 @@ watchVideo.addEventListener(
 
 
 /* =========================================================
-   CLOSE SAVE THE DATE VIDEO
+   CLOSE VIMEO
    ========================================================= */
 
 function closeVideoModal() {
@@ -1038,11 +1132,9 @@ function closeVideoModal() {
 
 
     /*
-       Resume the desktop background.
+       Resume desktop background video.
 
-       On mobile the background is handled
-       separately through the picture/image
-       implementation.
+       Mobile WebP continues automatically.
     */
 
     if (backgroundVideo) {
@@ -1073,7 +1165,7 @@ closeVideo.addEventListener(
 
 
 /* =========================================================
-   CLICK OUTSIDE VIDEO TO CLOSE
+   CLICK OUTSIDE VIDEO
    ========================================================= */
 
 videoModal.addEventListener(
@@ -1119,4 +1211,5 @@ document.addEventListener(
 
 
 </body>
+
 </html>
