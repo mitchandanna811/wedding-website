@@ -54,6 +54,17 @@
       object-fit: cover;
       z-index: 0;
       background: #000;
+
+      /* Start invisible */
+      opacity: 0;
+
+      /* Smooth cinematic dissolve */
+      transition: opacity 1.8s ease;
+    }
+
+    .hero-video.loaded,
+    .mobile-background.loaded {
+      opacity: 1;
     }
 
     .mobile-background {
@@ -664,12 +675,20 @@
       "anna-and-mitch-background-mobile-480x854.webp";
 
 
+    /* =========================
+       CHOOSE BACKGROUND
+    ========================= */
+
     if (isMobile) {
       backgroundVideo.src = mobileVideo;
     } else {
       backgroundVideo.src = desktopVideo;
     }
 
+
+    /* =========================
+       MOBILE FALLBACK
+    ========================= */
 
     function switchToMobileFallback() {
 
@@ -684,8 +703,28 @@
       backgroundVideo.style.display = "none";
 
       mobileBackground.style.display = "block";
+
+      /*
+        Allow the image to render first,
+        then fade it in.
+      */
+
+      requestAnimationFrame(function() {
+
+        requestAnimationFrame(function() {
+
+          mobileBackground.classList.add("loaded");
+
+        });
+
+      });
+
     }
 
+
+    /* =========================
+       START BACKGROUND VIDEO
+    ========================= */
 
     function tryBackgroundVideo() {
 
@@ -694,11 +733,40 @@
 
       if (playPromise !== undefined) {
 
-        playPromise.catch(function() {
+        playPromise
+          .then(function() {
 
-          switchToMobileFallback();
+            /*
+              The video is now actually playing.
 
-        });
+              Fade it in instead of allowing
+              the first frame to suddenly appear.
+            */
+
+            requestAnimationFrame(function() {
+
+              backgroundVideo.classList.add("loaded");
+
+            });
+
+          })
+          .catch(function() {
+
+            /*
+              Autoplay was rejected.
+
+              On mobile this is typically
+              Low Power Mode, so use the
+              animated WebP fallback.
+            */
+
+            switchToMobileFallback();
+
+          });
+
+      } else {
+
+        backgroundVideo.classList.add("loaded");
 
       }
 
@@ -769,7 +837,9 @@
         backgroundVideo.style.display !== "none" &&
         !backgroundVideo.paused
       ) {
+
         backgroundVideo.pause();
+
       }
 
 
@@ -778,7 +848,9 @@
       if (
         mobileBackground.style.display === "block"
       ) {
+
         mobileBackground.style.display = "none";
+
       }
 
 
@@ -903,13 +975,25 @@
           backgroundVideo.style.display === "none"
         ) {
 
+          /*
+            We were using the WebP fallback.
+          */
+
           mobileBackground.style.display =
             "block";
+
+          mobileBackground.classList.add(
+            "loaded"
+          );
 
         } else {
 
           backgroundVideo.style.display =
             "block";
+
+          backgroundVideo.classList.add(
+            "loaded"
+          );
 
           backgroundVideo.play().catch(function() {});
 
@@ -919,6 +1003,10 @@
 
         backgroundVideo.style.display =
           "block";
+
+        backgroundVideo.classList.add(
+          "loaded"
+        );
 
         backgroundVideo.play().catch(function() {});
 
